@@ -1,0 +1,28 @@
+
+# Set default behavior to automatically normalize line endings
+* text=auto
+
+# Treat all Python files as text and normalize (LF)
+*.py text
+
+# Treat HTML, CSS, JS files similarly
+*.html text
+*.css text
+*.js text
+
+# For shell scripts (optional, if you use them)
+*.sh text eol=lf
+
+# Windows-specific scripts can retain CRLF if needed
+*.bat text eol=crlf
+
+# Images and other binary files
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ico binary
+*.pdf binary
+*.zip binary
+*.woff binary
+*.woff2 binary

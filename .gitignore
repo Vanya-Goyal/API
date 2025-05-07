@@ -2,10 +2,10 @@
 __pycache__/
 *.py[cod]
 
-# Ignore virtual environments
-django/envirtual/
-env/
+# Ignore virtual environment folders
 venv/
+.env/
+env/
 .venv/
 
 # Django/Flask artifacts
