@@ -3,10 +3,6 @@ __pycache__/
 *.py[cod]
 
 # Ignore virtual environment folders
-venv/
-.env/
-env/
-.venv/
 
 # Django/Flask artifacts
 *.sqlite3
@@ -20,3 +16,8 @@ staticfiles/
 .idea/
 .DS_Store
 Thumbs.db
+
+
+# Ignore Python virtual environments
+ve1/
+ve2/
