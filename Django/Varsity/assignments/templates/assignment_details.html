@@ -1,0 +1,490 @@
+{% extends 'home/base.html' %}
+
+{% block content %}
+<style>
+    /* Modern Quiz Layout with Enhanced 3D Effects and Distinct Questions */
+:root {
+  --primary-color: #4361ee;
+  --secondary-color: #3a0ca3;
+  --accent-color: #f72585;
+  --accent-color-2: #7209b7;
+  --accent-color-3: #4cc9f0;
+  --accent-color-4: #ff8500;
+  --light-bg: #f8f9fa;
+  --dark-text: #2b2d42;
+  --light-text: #8d99ae;
+  --white: #ffffff;
+  --shadow-sm: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 15px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 15px 30px rgba(0, 0, 0, 0.15);
+  --border-radius: 12px;
+}
+
+body {
+  background-color: #f5f7fb;
+  font-family: 'Poppins', 'Segoe UI', sans-serif;
+  color: var(--dark-text);
+}
+
+.container {
+  perspective: 1200px;
+  max-width: 850px;
+  margin: 40px auto;
+  padding: 30px;
+  background: var(--white);
+  border-radius: var(--border-radius);
+  box-shadow: var(--shadow-md);
+  animation: fadeIn 0.8s ease-out;
+}
+
+/* Header Section */
+h2 {
+  color: var(--primary-color);
+  font-size: 2.2rem;
+  font-weight: 700;
+  text-align: center;
+  margin-bottom: 20px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  position: relative;
+  transform: translateZ(30px);
+  padding-bottom: 15px;
+  animation: floatIn 1s ease-out;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: linear-gradient(90deg, var(--primary-color), var(--accent-color));
+  border-radius: 2px;
+  animation: expandWidth 1.5s ease-out;
+}
+
+p {
+  color: var(--light-text);
+  text-align: center;
+  margin-bottom: 30px;
+  font-size: 1.1rem;
+  transform: translateZ(20px);
+  animation: fadeSlideUp 1s ease-out 0.2s;
+  animation-fill-mode: both;
+}
+
+/* Question Section - DISTINCTLY STYLED */
+.question-card {
+  background: var(--white);
+  border-radius: var(--border-radius);
+  padding: 25px;
+  margin-bottom: 35px;
+  box-shadow: var(--shadow-sm);
+  transform-style: preserve-3d;
+  transform: translateZ(15px) rotateX(1deg);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+  animation: fadeSlideUp 0.6s ease-out;
+  animation-fill-mode: both;
+}
+
+/* First question style */
+.question-card:nth-child(4n+1) {
+  border-left: 6px solid var(--primary-color);
+  background: linear-gradient(to right, rgba(67, 97, 238, 0.05), transparent);
+}
+
+.question-card:nth-child(4n+1) .question-number {
+  background-color: var(--primary-color);
+}
+
+.question-card:nth-child(4n+1) .options-container::before {
+  background: var(--primary-color);
+}
+
+/* Second question style */
+.question-card:nth-child(4n+2) {
+  border-left: 6px solid var(--accent-color);
+  background: linear-gradient(to right, rgba(247, 37, 133, 0.05), transparent);
+}
+
+.question-card:nth-child(4n+2) .question-number {
+  background-color: var(--accent-color);
+}
+
+.question-card:nth-child(4n+2) .options-container::before {
+  background: var(--accent-color);
+}
+
+/* Third question style */
+.question-card:nth-child(4n+3) {
+  border-left: 6px solid var(--accent-color-2);
+  background: linear-gradient(to right, rgba(114, 9, 183, 0.05), transparent);
+}
+
+.question-card:nth-child(4n+3) .question-number {
+  background-color: var(--accent-color-2);
+}
+
+.question-card:nth-child(4n+3) .options-container::before {
+  background: var(--accent-color-2);
+}
+
+/* Fourth question style */
+.question-card:nth-child(4n+4) {
+  border-left: 6px solid var(--accent-color-3);
+  background: linear-gradient(to right, rgba(76, 201, 240, 0.05), transparent);
+}
+
+.question-card:nth-child(4n+4) .question-number {
+  background-color: var(--accent-color-3);
+}
+
+.question-card:nth-child(4n+4) .options-container::before {
+  background: var(--accent-color-3);
+}
+
+.question-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, transparent 50%, rgba(67, 97, 238, 0.1) 50%);
+  border-bottom-left-radius: 100px;
+  z-index: 0;
+}
+
+.question-card:hover {
+  transform: translateZ(25px) rotateX(0deg);
+  box-shadow: var(--shadow-lg);
+}
+
+.question-number {
+  display: inline-block;
+  width: 36px;
+  height: 36px;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  line-height: 36px;
+  font-weight: 700;
+  margin-right: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  transform: translateZ(5px);
+}
+
+.question-text {
+  font-size: 1.2rem;
+  font-weight: 600;
+  color: var(--dark-text);
+  margin-bottom: 20px;
+  display: flex;
+  align-items: center;
+  transform: translateZ(10px);
+}
+
+/* Options Section - Clear Partition */
+.options-container {
+  background: var(--light-bg);
+  border-radius: 8px;
+  padding: 20px;
+  margin-top: 15px;
+  transform: translateZ(5px);
+  position: relative;
+  border-top: 2px dashed rgba(0, 0, 0, 0.1);
+}
+
+.options-container::before {
+  content: 'OPTIONS';
+  position: absolute;
+  top: -10px;
+  left: 20px;
+  color: white;
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 3px 10px;
+  border-radius: 10px;
+  letter-spacing: 1px;
+}
+
+/* Distinct form checks based on question number */
+.question-card:nth-child(4n+1) .form-check:hover {
+  border-left: 3px solid var(--primary-color);
+}
+
+.question-card:nth-child(4n+2) .form-check:hover {
+  border-left: 3px solid var(--accent-color);
+}
+
+.question-card:nth-child(4n+3) .form-check:hover {
+  border-left: 3px solid var(--accent-color-2);
+}
+
+.question-card:nth-child(4n+4) .form-check:hover {
+  border-left: 3px solid var(--accent-color-3);
+}
+
+.form-check {
+  background: white;
+  padding: 12px 15px;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  display: flex;
+  align-items: center;
+  animation: slideFromRight 0.5s ease-out;
+  animation-fill-mode: both;
+  border-left: 3px solid transparent;
+}
+
+.form-check:hover {
+  transform: translateX(8px) scale(1.01);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(to right, white, #f5f7fd);
+}
+
+/* Staggered animation for options */
+.form-check:nth-child(1) { animation-delay: 0.1s; }
+.form-check:nth-child(2) { animation-delay: 0.2s; }
+.form-check:nth-child(3) { animation-delay: 0.3s; }
+.form-check:nth-child(4) { animation-delay: 0.4s; }
+
+/* Custom Radio Button - Distinct for each question */
+.form-check-input {
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border: 2px solid #d1d9e6;
+  border-radius: 50%;
+  margin-right: 12px;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.question-card:nth-child(4n+1) .form-check-input:checked {
+  border-color: var(--primary-color);
+}
+
+.question-card:nth-child(4n+1) .form-check-input:checked::after {
+  background-color: var(--primary-color);
+}
+
+.question-card:nth-child(4n+2) .form-check-input:checked {
+  border-color: var(--accent-color);
+}
+
+.question-card:nth-child(4n+2) .form-check-input:checked::after {
+  background-color: var(--accent-color);
+}
+
+.question-card:nth-child(4n+3) .form-check-input:checked {
+  border-color: var(--accent-color-2);
+}
+
+.question-card:nth-child(4n+3) .form-check-input:checked::after {
+  background-color: var(--accent-color-2);
+}
+
+.question-card:nth-child(4n+4) .form-check-input:checked {
+  border-color: var(--accent-color-3);
+}
+
+.question-card:nth-child(4n+4) .form-check-input:checked::after {
+  background-color: var(--accent-color-3);
+}
+
+.form-check-input:checked {
+  background-color: var(--white);
+}
+
+.form-check-input:checked::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  animation: pulseIn 0.3s ease;
+}
+
+.form-check-label {
+  cursor: pointer;
+  font-weight: 500;
+  color: var(--dark-text);
+  transition: color 0.2s ease;
+  flex-grow: 1;
+}
+
+.question-card:nth-child(4n+1) .form-check-input:checked + .form-check-label {
+  color: var(--primary-color);
+}
+
+.question-card:nth-child(4n+2) .form-check-input:checked + .form-check-label {
+  color: var(--accent-color);
+}
+
+.question-card:nth-child(4n+3) .form-check-input:checked + .form-check-label {
+  color: var(--accent-color-2);
+}
+
+.question-card:nth-child(4n+4) .form-check-input:checked + .form-check-label {
+  color: var(--accent-color-3);
+}
+
+.form-check-input:checked + .form-check-label {
+  font-weight: 600;
+}
+
+/* Submit Button with 3D effect */
+.btn-primary {
+  background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+  color: white;
+  border: none;
+  padding: 12px 30px;
+  border-radius: 30px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  box-shadow: 0 10px 20px rgba(67, 97, 238, 0.3);
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  transform: translateZ(20px);
+  position: relative;
+  overflow: hidden;
+  display: block;
+  margin: 30px auto 10px;
+  animation: float 3s ease-in-out infinite;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+  transition: transform 0.6s ease;
+}
+
+.btn-primary:hover {
+  transform: translateZ(20px) scale(1.05);
+  box-shadow: 0 15px 30px rgba(67, 97, 238, 0.4);
+}
+
+.btn-primary:hover::before {
+  transform: translateX(100%);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fadeSlideUp {
+  from { 
+    opacity: 0; 
+    transform: translateY(20px);
+  }
+  to { 
+    opacity: 1; 
+    transform: translateY(0);
+  }
+}
+
+@keyframes floatIn {
+  0% { 
+    opacity: 0; 
+    transform: translateY(-30px) translateZ(30px);
+  }
+  100% { 
+    opacity: 1; 
+    transform: translateY(0) translateZ(30px);
+  }
+}
+
+@keyframes expandWidth {
+  from { width: 0; }
+  to { width: 100px; }
+}
+
+@keyframes slideFromRight {
+  from { 
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to { 
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes pulseIn {
+  0% { transform: translate(-50%, -50%) scale(0); }
+  70% { transform: translate(-50%, -50%) scale(1.2); }
+  100% { transform: translate(-50%, -50%) scale(1); }
+}
+
+@keyframes float {
+  0% { transform: translateZ(20px); }
+  50% { transform: translateZ(20px) translateY(-5px); }
+  100% { transform: translateZ(20px); }
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+  .container {
+    padding: 20px;
+    margin: 20px auto;
+  }
+  
+  .question-card {
+    padding: 20px;
+  }
+  
+  h2 {
+    font-size: 1.8rem;
+  }
+}
+</style>
+
+<div class="container my-4">
+    <h2>{{ assignment.title }}</h2>
+    <p>{{ assignment.description }}</p>
+
+    <form method="post">
+        {% csrf_token %}
+        {% for question in questions %}
+            <div class="question-card">
+                <h5 class="question-number">{{ forloop.counter }}</h5>
+                <p class="question-text">{{ question.text }}</p>
+
+                <div class="options-container">
+                    {% for option in question.options.all %}
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio"
+                                   name="{{ question.id }}" id="option{{ option.id }}"
+                                   value="{{ option.id }}">
+                            <label class="form-check-label" for="option{{ option.id }}">
+                                {{ option.text }}
+                            </label>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        {% endfor %}
+
+        <button type="submit" class="btn btn-primary">Submit Assignment</button>
+    </form>
+</div>
+
+{% endblock %}

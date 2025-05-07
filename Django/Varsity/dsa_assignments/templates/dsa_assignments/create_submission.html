@@ -1,0 +1,22 @@
+
+{% extends 'home/base.html' %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-sm border-0 p-4">
+    <h3 class="mb-3 fw-bold text-primary">📝 Submit Your Code for: <span class="text-dark">{{ assignment.title }}</span></h3>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="mb-3">
+        {{ form.code.label_tag }}
+        {{ form.code|add_class:"form-control code-box" }}
+      </div>
+      <button type="submit" class="btn btn-success">
+        <i class="fas fa-upload me-1"></i> Submit Code
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

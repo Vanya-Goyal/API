@@ -1,0 +1,19 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<h2>🛒 My Cart</h2>
+{% if cart.courses.all %}
+  <ul class="list-group mb-3">
+    {% for course in cart.courses.all %}
+      <li class="list-group-item">
+        <h5>{{ course.title }}</h5>
+        <p>{{ course.description|truncatewords:15 }}</p>
+        <strong>Price:</strong> ₹{{ course.price }}
+      </li>
+    {% endfor %}
+  </ul>
+  <h4>Total: ₹{{ cart.total_price }}</h4>
+  <a href="{% url 'cart:payment' %}" class="btn btn-primary">Proceed to Payment</a>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+{% endblock %}

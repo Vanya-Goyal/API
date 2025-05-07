@@ -1,0 +1,22 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Your DSA Assignments</h2>
+  <a href="{% url 'dsa_assignments:add_assignment' course.id %}" class="btn btn-primary mb-3">Add Assignment</a>
+
+  <!-- <a href="{% url 'instructors:manage_assignments' course.id %}" class="btn btn-primary mb-3">Add Assignment</a> -->
+  <ul class="list-group">
+    {% for assignment in assignments %}
+      <li class="list-group-item">
+        <strong>{{ assignment.title }}</strong> ({{ assignment.course.title }})
+        <a href="{% url 'dsa_assignments:edit_assignment' assignment.pk %}" class="btn btn-sm btn-warning float-end ms-2">Edit</a>
+        <a href="{% url 'dsa_assignments:delete_assignment' assignment.pk %}" class="btn btn-sm btn-danger float-end">Delete</a>
+      </li>
+      
+      
+    {% empty %}
+      <li class="list-group-item">No assignments found.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

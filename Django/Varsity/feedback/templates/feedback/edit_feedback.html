@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- Edit Feedback Form -->
+<div class="feedback-form">
+    <h2 class="form-title">Edit Your Feedback</h2>
+    <form method="POST" action="{% url 'update_feedback' feedback.id %}">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="course">Select Course</label>
+            <select id="course" name="course_id" required>
+                <option value="" disabled selected>Choose a course</option>
+                {% for course in courses %}
+                <option value="{{ course.id }}" {% if course.id == feedback.course_id %}selected{% endif %}>{{ course.title }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label>Rating</label>
+            <div class="star-rating">
+                <input id="star5" name="rating" type="radio" value="5" {% if feedback.rating == 5 %}checked{% endif %} />
+                <label for="star5" title="Excellent">★</label>
+                <input id="star4" name="rating" type="radio" value="4" {% if feedback.rating == 4 %}checked{% endif %} />
+                <label for="star4" title="Very Good">★</label>
+                <input id="star3" name="rating" type="radio" value="3" {% if feedback.rating == 3 %}checked{% endif %} />
+                <label for="star3" title="Good">★</label>
+                <input id="star2" name="rating" type="radio" value="2" {% if feedback.rating == 2 %}checked{% endif %} />
+                <label for="star2" title="Fair">★</label>
+                <input id="star1" name="rating" type="radio" value="1" {% if feedback.rating == 1 %}checked{% endif %} />
+                <label for="star1" title="Poor">★</label>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="comment">Your Feedback</label>
+            <textarea id="comment" name="comment" required>{{ feedback.comment }}</textarea>
+        </div>
+        
+        <button type="submit" class="btn">Update Feedback</button>
+    </form>
+</div>
+</body>
+</html>

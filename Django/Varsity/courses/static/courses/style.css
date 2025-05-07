@@ -1,0 +1,45 @@
+body {
+    background-color: #f9f9f9;
+}
+
+.card {
+    height: 100%;
+}
+
+.card-title {
+    font-weight: bold;
+}
+.card {
+    transition: transform 0.2s ease-in-out;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+  
+  .card:hover {
+    transform: scale(1.03);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  }
+  
+  .card-img-top {
+    height: 180px;
+    object-fit: cover;
+  }
+  
+  .card-body {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .card-title {
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  
+  .badge {
+    font-size: 0.75rem;
+  }
+  
+  .btn-primary {
+    margin-top: auto;
+  }
+  

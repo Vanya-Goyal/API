@@ -1,0 +1,124 @@
+{% extends 'home/base.html' %}
+
+{% block title %}Courses{% endblock %}
+
+{% block extra_css %}
+<style>
+    /* Main container styling */
+    .course-container {
+        padding: 2rem 0;
+        background-color: #f8f9fa;
+    }
+    
+    /* Card styling */
+    .course-card {
+        border: none;
+        border-radius: 10px;
+        overflow: hidden;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 100%;
+    }
+    
+    .course-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    }
+    
+    /* Card image styling */
+    .card-img-top {
+        height: 180px;
+        object-fit: cover;
+        width: 100%;
+    }
+    
+    /* Card body styling */
+    .card-body {
+        padding: 1.5rem;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .card-title {
+        font-weight: 600;
+        color: #2c3e50;
+        margin-bottom: 1rem;
+        font-size: 1.25rem;
+    }
+    
+    /* Button styling */
+    .btn-view-assignments {
+        background-color: #3498db;
+        border: none;
+        border-radius: 5px;
+        padding: 8px 15px;
+        color: white;
+        font-weight: 500;
+        margin-top: auto;
+        align-self: flex-start;
+        transition: background-color 0.3s;
+    }
+    
+    .btn-view-assignments:hover {
+        background-color: #2980b9;
+        color: white;
+    }
+    
+    /* Empty state styling */
+    .empty-state {
+        color: #7f8c8d;
+        font-size: 1.1rem;
+        text-align: center;
+        padding: 3rem 0;
+    }
+    
+    /* Section header */
+    .section-header {
+        color: #2c3e50;
+        font-weight: 700;
+        margin-bottom: 2rem;
+        position: relative;
+        padding-bottom: 10px;
+    }
+    
+    .section-header:after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 80px;
+        height: 3px;
+        background: #3498db;
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="course-container">
+    <div class="container">
+        <h2 class="text-center section-header">Quizzes</h2>
+        <div class="row">
+            {% for course in courses %}
+            <div class="col-md-4 mb-4">
+                <div class="card course-card shadow-sm h-100">
+                    {% if course.image %}
+                    <img src="{{ course.image.url }}" class="card-img-top" alt="{{ course.name }}">
+                    {% else %}
+                    <img src="https://via.placeholder.com/300x180?text=Course+Image" class="card-img-top" alt="Default course image">
+                    {% endif %}
+                    <div class="card-body">
+                        <h5 class="card-title">{{ course.title }}</h5>
+                        <p class="card-text text-muted">{{ course.description|truncatechars:100 }}</p>
+                        <a href="{% url 'assignments:assignment_list' course.id %}" class="btn btn-view-assignments">View Assignments</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <div class="col-12">
+                <p class="empty-state">No courses available at the moment.</p>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

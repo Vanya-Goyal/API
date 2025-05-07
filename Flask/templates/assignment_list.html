@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-4">
+  {% for assignment in assignments %}
+  <h2>{{ assignment.course.title }}</h2>
+  <a href="{{ url_for('add_assignment', course_id=course.id) }}" class="btn btn-primary mb-3">Add Assignment</a>
+  <ul class="list-group">
+    
+      <li class="list-group-item">
+        <strong>{{ assignment.title }}</strong> ({{ assignment.course.title }})
+        <a href="{{ url_for('edit_assignment', assignment_id=assignment.id) }}" class="btn btn-sm btn-warning float-end ms-2">Edit</a>
+        <a href="{{ url_for('delete_assignment', assignment_id=assignment.id) }}" class="btn btn-sm btn-danger float-end">Delete</a>
+      </li>
+    {% else %}
+      <li class="list-group-item">No assignments found.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

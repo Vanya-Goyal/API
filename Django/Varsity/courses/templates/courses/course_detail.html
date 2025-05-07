@@ -1,0 +1,46 @@
+{% extends "home/base.html" %}
+{% load static %}
+{% block content %}
+<div class="container my-5">
+  <div class="card shadow-lg border-0 rounded-4 overflow-hidden">
+    <div class="row g-0">
+      
+      {% if course.mge %}
+      <div class="col-md-5">
+        <img src="{{ course.image_url }}" class="img-fluid h-100 object-fit-cover" style="object-fit: cover;">
+      </div>
+      {% endif %}
+
+      <div class="col-md-7 p-4 d-flex flex-column justify-content-between">
+        <div>
+          <h2 class="fw-bold text-primary mb-3">{{ course.title }}</h2>
+          <p class="text-muted">{{ course.description }}</p>
+          <p class="fs-5 mt-3"><strong>💰 Price:</strong> ₹{{ course.price }}</p>
+          <p class="mb-3"><strong>📂 Category:</strong> {{ course.category }}</p>
+        </div>
+
+        {% if user in course.students.all %}
+        <div class="mt-4">
+          <h5 class="text-success"><i class="fas fa-check-circle"></i> You are enrolled in this course</h5>
+          <p class="text-muted">Click below to access and submit your assignments.</p>
+          <a href="{% url 'dsa_assignments:assignment_list_student' course.id %}" class="btn btn-outline-success btn-lg">
+            <i class="fas fa-code"></i> Check Assignments
+          </a>
+          <a href="{% url 'assignments:assignment_list' course.id %}" class="btn btn-outline-success btn-lg">
+            <i class="fas fa-code"></i> Quizzes
+          </a>
+        </div>
+        {% else %}
+        <div class="mt-4">
+          <p class="text-danger"><strong>You are not enrolled in this course yet.</strong></p>
+          <a href="{% url 'courses:buy_course' course.id %}" class="btn btn-primary btn-lg">
+            <i class="fas fa-cart-plus"></i> Buy Course to Access Content
+          </a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

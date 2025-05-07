@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Full Stack Web Development Course | Knowlify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/webdev.css') }}">
+</head>
+<body>
+
+    {% extends "base.html" %}
+    {% block content %}
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Full Stack Web Development</h1>
+            <p>Master Frontend & Backend Development with Hands-on Projects</p>
+            <ul class="course-details">
+                <li>📅 Duration: 6 Months</li>
+                <li>⭐ Beginner to Advanced</li>
+                <li>🏆 Certificate of Completion</li>
+            </ul>
+            <a href="#pricing" class="enroll-btn">Enroll Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="../static/images/webdevc.jpeg" alt="Full Stack Web Development">
+        </div>
+    </section>
+
+    <!-- About the Course -->
+    <section class="about-course">
+        <h2>About This Course</h2>
+        <p>Learn HTML, CSS, JavaScript, React, Node.js, Express, and MongoDB to build real-world web applications. This course is perfect for beginners and aspiring developers.</p>
+        <ul>
+            <li>✅ Learn both Frontend & Backend</li>
+            <li>✅ Hands-on coding with real projects</li>
+            <li>✅ Industry-relevant skills for web development jobs</li>
+        </ul>
+    </section>
+
+    <!-- Course Curriculum -->
+    <section class="curriculum">
+        <h2>Course Curriculum</h2>
+        <div class="modules">
+            <div class="module">
+                <h3>Module 1: HTML, CSS & Responsive Design</h3>
+                <p>Learn the building blocks of web development: HTML, CSS, Flexbox, and Grid.</p>
+            </div>
+            <div class="module">
+                <h3>Module 2: JavaScript & ES6+</h3>
+                <p>Understand JavaScript fundamentals, DOM Manipulation, and modern ES6+ features.</p>
+            </div>
+            <div class="module">
+                <h3>Module 3: React.js</h3>
+                <p>Master components, hooks, state management, and React Router.</p>
+            </div>
+            <div class="module">
+                <h3>Module 4: Backend Development</h3>
+                <p>Learn Node.js, Express.js, and build REST APIs.</p>
+            </div>
+            <div class="module">
+                <h3>Module 5: Databases</h3>
+                <p>Work with MongoDB, Firebase, and database integration.</p>
+            </div>
+            <div class="module">
+                <h3>Module 6: Deployment & Full-Stack Projects</h3>
+                <p>Deploy projects using GitHub, Netlify, and Heroku.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor Section -->
+    <section class="instructor">
+        <h2>Meet Your Instructor</h2>
+        <div class="instructor-card">
+            <img src="../static/images/websir.webp" alt="Instructor">
+            <h3>John Doe</h3>
+            <p>Senior Web Developer | 10+ Years of Experience</p>
+            <p>Worked with Google, Microsoft, and top startups. Passionate about teaching and building scalable applications.</p>
+        </div>
+    </section>
+
+    <!-- Student Testimonials -->
+    <section class="testimonials">
+        <h2>What Our Students Say</h2>
+        <div class="testimonial">
+            <p>“This course helped me land my first web development job. The projects were amazing!”</p>
+            <h4>⭐ ⭐ ⭐ ⭐ ⭐ - Sarah M.</h4>
+        </div>
+        <div class="testimonial">
+            <p>“The best full-stack course I’ve taken. Very well structured and beginner-friendly.”</p>
+            <h4>⭐ ⭐ ⭐ ⭐ ⭐ - Alex B.</h4>
+        </div>
+    </section>
+
+    <!-- What’s Included -->
+    <section class="whats-included">
+        <h2>What's Included</h2>
+        <ul>
+            <li>🎥 100+ HD Video Lessons</li>
+            <li>🏆 Certificate of Completion</li>
+            <li>🔥 Live Q&A Sessions</li>
+            <li>✅ Hands-on Projects</li>
+            <li>💡 Career Guidance</li>
+        </ul>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="pricing" id="pricing">
+        <h2>Choose Your Plan</h2>
+        <div class="price-card">
+            <h3>Standard</h3>
+            <p>🎥 Self-Paced Learning</p>
+            <p>✅ Lifetime Access</p>
+            <p>💰 <strong>$49.99</strong></p>
+            <form method="POST" action="{{ url_for('add_to_cart') }}">
+                <input type="hidden" name="course_id" value="wb101">
+                <input type="hidden" name="course_name" value="web development">
+                <input type="hidden" name="price" value="68">
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            </form>
+        </div>
+        <div class="price-card">
+            <h3>Premium</h3>
+            <p>👨‍🏫 1-on-1 Mentorship</p>
+            <p>💡 Job Assistance</p>
+            <p>💰 <strong>$99.99</strong></p>
+            <button>Buy Now</button>
+        </div>
+
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>Do I need prior coding experience?</h3>
+            <p>No, this course is beginner-friendly!</p>
+        </div>
+        <div class="faq-item">
+            <h3>How long do I have access to the course?</h3>
+            <p>You get lifetime access!</p>
+        </div>
+    </section>
+
+    {% endblock %}
+
+</body>
+</html>

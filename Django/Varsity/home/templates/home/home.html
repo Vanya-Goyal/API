@@ -1,0 +1,254 @@
+{% extends "home/base.html" %}
+{% load static %}
+
+
+
+{% block content %}
+
+
+<div class="main-content">   
+    <section class="hero-section text-center text-white d-flex flex-column justify-content-center align-items-center">
+        <div class="hero-content text-center">
+            <h1 class="hero-title display-4 fw-bold fade-in">Learn Anytime, Anywhere</h1>
+            <p class=" hero-subtitle lead slide-in">Build Your Future with Knowlify - Access Thousands of Courses from Top Instructors</p>
+            <div class="hero-button mt-3">
+                <a href="{% url 'courses:course_list' %}" class="hero-btn btn btn-outline-light btn-lg me-3 scale-hover ">Explore Courses</a>
+                <a href="{% url 'accounts:signup' %}" class="hero-btn btn btn-outline-light btn-lg scale-hover">Join for Free</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="course-categories container text-center my-5">
+        <h2 class="fw-bold">Explore Popular Categories</h2>
+        <p class="text-muted">Choose from a variety of top-rated courses</p>
+        <div class="row mt-4">
+            <div class="col-md-4">
+                <a href="#" class="category-card">
+                    <img src="{% static 'images/webdev.jpg' %}" alt="Home Banner">
+                    <h5>Web Development</h5>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="category-card">
+                    <img src="{% static 'images/datascience.avif' %}" alt="Home Banner">
+                    <h5>Data Science</h5>
+                </a>
+            </div>
+            <div class="col-md-4">
+                <a href="#" class="category-card">
+                    <img src="{% static 'images/AI1.jpeg' %}" alt="Home Banner">
+                    <h5>AI & Machine Learning</h5>
+                </a>
+            </div>
+        </div>
+    </section>
+    
+          <!-- Featured Courses Section (Carousel) -->
+          <section class="featured-courses container my-5">
+            <h2 class="fw-bold text-center">Top Featured Courses</h2>
+            <p class="text-muted text-center">Learn from industry experts and enhance your skills</p>
+        
+            <div id="courseCarousel" class="carousel slide" data-bs-ride="carousel">
+                <!-- Indicators -->
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#courseCarousel" data-bs-slide-to="0" class="active" aria-current="true"></button>
+                    <button type="button" data-bs-target="#courseCarousel" data-bs-slide-to="1"></button>
+                </div>
+                
+                <div class="carousel-inner">
+                    <!-- First Slide -->
+                    <div class="carousel-item active">
+                        <div class="row g-4">  <!-- Added g-4 for gap between cards -->
+                            <div class="col-md-4">
+                                <div class="course-card card h-100">  <!-- Added card and h-100 classes -->
+                                    <img src="{% static 'images/webdev.jpg' %}" class="card-img-top" alt="Web Development">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Full Stack Web Development</h5>
+                                        <p class="card-text">By John Doe</p>
+                                        <span class="text-warning">⭐ 4.7 | 15,000 Students</span>
+                                        <p class="price fw-bold mt-2">$49.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="course-card card h-100">
+                                    <img src="{% static 'images/datascience.avif' %}" class="card-img-top" alt="Data Science">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Data Science & Machine Learning</h5>
+                                        <p class="card-text">By Jane Smith</p>
+                                        <span class="text-warning">⭐ 4.8 | 20,000 Students</span>
+                                        <p class="price fw-bold mt-2">$59.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="course-card card h-100">
+                                    <img src="{% static 'images/python.avif' %}" class="card-img-top" alt="Python">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Python for Beginners</h5>
+                                        <p class="card-text">By Alice Johnson</p>
+                                        <span class="text-warning">⭐ 4.6 | 10,000 Students</span>
+                                        <p class="price fw-bold mt-2">Free</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Second Slide -->
+                    <div class="carousel-item">
+                        <div class="row g-4">
+                            <div class="col-md-4">
+                                <div class="course-card card h-100">
+                                    <img src="{% static 'images/Cybersecurity.webp' %}" class="card-img-top" alt="Cybersecurity">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Cybersecurity Fundamentals</h5>
+                                        <p class="card-text">By Mark Lee</p>
+                                        <span class="text-warning">⭐ 4.5 | 8,000 Students</span>
+                                        <p class="price fw-bold mt-2">$39.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="course-card card h-100">
+                                    <img src="{% static 'images/digital.avif' %}" class="card-img-top" alt="Digital Marketing">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Digital Marketing Masterclass</h5>
+                                        <p class="card-text">By Sarah Kim</p>
+                                        <span class="text-warning">⭐ 4.9 | 18,000 Students</span>
+                                        <p class="price fw-bold mt-2">$29.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="course-card card h-100">
+                                    <img src="{% static 'images/AI1.jpeg' %}" class="card-img-top" alt="AI">
+                                    <div class="card-body">
+                                        <h5 class="card-title">Artificial Intelligence Explained</h5>
+                                        <p class="card-text">By David Brown</p>
+                                        <span class="text-warning">⭐ 4.7 | 12,000 Students</span>
+                                        <p class="price fw-bold mt-2">$69.99</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+        
+                <!-- Carousel Controls -->
+                <button class="carousel-control-prev" type="button" data-bs-target="#courseCarousel" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#courseCarousel" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+        
+            <div class="text-center mt-4">
+                <a href="{% url 'courses:course_list' %}" class="btn btn-dark btn-lg">View All Courses</a>
+            </div>
+        </section>
+
+<!-- Why Choose Knowlify Section -->
+
+<section class="why-choose container text-center my-5 scroll-animation">
+    <h2 class="fw-bold">Why Choose Knowlify?</h2>
+    <div class="row mt-4">
+        <div class="col-md-3 col-sm-6 mb-4">
+            <img src="{% static 'images/instructor.jpeg' %}" alt="Expert Instructors" class="feature-icon">
+            <h5>Expert Instructors</h5>
+            <p>Learn from industry leaders & professionals.</p>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <img src="{% static 'images/lifetime.jpeg' %}" alt="Lifetime Access" class="feature-icon">
+            <h5>Lifetime Access</h5>
+            <p>Access courses anytime, anywhere.</p>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <img src="{% static 'images/learning.jpeg' %}" alt="Hands-on Learning" class="feature-icon">
+            <h5>Hands-on Learning</h5>
+            <p>Quizzes, projects, and real-world scenarios.</p>
+        </div>
+        <div class="col-md-3 col-sm-6 mb-4">
+            <img src="{% static 'images/certifiation.jpeg' %}" alt="Certification" class="feature-icon">
+            <h5>Certification</h5>
+            <p>Get certified and boost your career.</p>
+        </div>
+    </div>
+</section>
+
+
+<!-- Student Testimonials Section -->
+<section class="testimonials container text-center my-5 scroll-animation">
+    <h2 class="fw-bold">What Our Students Say</h2>
+    <div class="row mt-4">
+        <div class="col-md-4">
+            <img src="{% static 'images/student1.jpeg' %}" alt="Home Banner">
+            <h5>John Doe</h5>
+            <p>"Knowlify helped me land my dream job in Web Development!"</p>
+            <span>⭐ 4.8 | Full Stack Web Development</span>
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'images/student2.jpeg' %}" alt="Home Banner">
+            <h5>Jane Smith</h5>
+            <p>"The AI course was amazing! I built my own chatbot."</p>
+            <span>⭐ 4.9 | AI & Machine Learning</span>
+        </div>
+        <div class="col-md-4">
+            <img src="{% static 'images/student3.jpeg' %}" alt="Home Banner">
+            <h5>Ali Khan</h5>
+            <p>"Clear explanations and practical projects. Highly recommend!"</p>
+            <span>⭐ 4.7 | Data Science & Analytics</span>
+        </div>
+    </div>
+</section>
+
+<!-- Meet Our Instructors Section -->
+<section class="instructors container text-center my-5 scroll-animation">
+    <h2 class="fw-bold">Meet Our Instructors</h2>
+    <div class="row mt-4">
+        <!-- Instructor 1 -->
+        <div class="col-md-4 mb-4">
+            <div class="instructor-card">
+                <img src="{% static 'images/teacher1.jpeg' %}" alt="Dr. Emily Carter" class="instructor-img">
+                <h5>Dr. Emily Carter</h5>
+                <p class="qualification">PhD in Computer Science | 10+ Years Experience</p>
+                <p class="course-taught">Teaches: Full Stack Web Development</p>
+                <p class="instructor-message">"I believe in making learning interactive and project-based. Join me to master web development with real-world projects!"</p>
+            </div>
+        </div>
+        <!-- Instructor 2 -->
+        <div class="col-md-4 mb-4">
+            <div class="instructor-card">
+                <img src="{% static 'images/teacher2.jpeg' %}" alt="Prof. Mark Johnson" class="instructor-img">
+                <h5>Prof. Mark Johnson</h5>
+                <p class="qualification">MSc in Data Science | 8+ Years Experience</p>
+                <p class="course-taught">Teaches: Data Science & Machine Learning</p>
+                <p class="instructor-message">"Data is the future! Let’s explore machine learning with hands-on projects and deep insights into AI-driven analytics."</p>
+            </div>
+        </div>
+        <!-- Instructor 3 -->
+        <div class="col-md-4 mb-4">
+            <div class="instructor-card">
+                <img src="{% static 'images/teacher3.avif' %}" alt="Sarah Lee" class="instructor-img">
+                <h5>Sarah Lee</h5>
+                <p class="qualification">MBA in Marketing | 7+ Years Experience</p>
+                <p class="course-taught">Teaches: Digital Marketing & SEO</p>
+                <p class="instructor-message">"Marketing is about storytelling. Join me to learn how to build brands and scale businesses with digital strategies."</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+    <!-- Extra Space for Footer Alignment -->
+    <div class="spacer"></div>
+
+{% endblock %}

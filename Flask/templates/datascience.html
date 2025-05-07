@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Science Mastery Course | Knowlify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/datascience.css') }}">
+</head>
+<body>
+
+    {% extends "base.html" %}
+    {% block content %}
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Data Science Mastery</h1>
+            <p>Learn Data Analysis, Machine Learning & AI with Real-World Projects</p>
+            <ul class="course-details">
+                <li>📅 Duration: 8 Months</li>
+                <li>⭐ Beginner to Advanced</li>
+                <li>🏆 Certificate of Completion</li>
+            </ul>
+            <a href="#pricing" class="enroll-btn">Enroll Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="../static/images/datasciencec.jpeg" alt="Data Science Course">
+        </div>
+    </section>
+
+    <!-- About the Course -->
+    <section class="about-course">
+        <h2>About This Course</h2>
+        <p>Learn Python, Data Analysis, Machine Learning, Deep Learning, and AI. Gain hands-on experience with real-world datasets and projects.</p>
+        <ul>
+            <li>✅ Master Python, Pandas, NumPy, and SQL</li>
+            <li>✅ Hands-on Data Analysis & Visualization</li>
+            <li>✅ Build AI Models with Machine Learning & Deep Learning</li>
+        </ul>
+    </section>
+
+    <!-- Course Curriculum -->
+    <section class="curriculum">
+        <h2>Course Curriculum</h2>
+        <div class="modules">
+            <div class="module">
+                <h3>Module 1: Python for Data Science</h3>
+                <p>Learn Python, Pandas, NumPy, and Jupyter Notebooks.</p>
+            </div>
+            <div class="module">
+                <h3>Module 2: Data Visualization</h3>
+                <p>Use Matplotlib, Seaborn, and Plotly to visualize data.</p>
+            </div>
+            <div class="module">
+                <h3>Module 3: SQL & Databases</h3>
+                <p>Master SQL for querying databases and managing datasets.</p>
+            </div>
+            <div class="module">
+                <h3>Module 4: Machine Learning</h3>
+                <p>Build ML models using Scikit-learn and TensorFlow.</p>
+            </div>
+            <div class="module">
+                <h3>Module 5: Deep Learning & AI</h3>
+                <p>Explore Neural Networks and Deep Learning with Keras.</p>
+            </div>
+            <div class="module">
+                <h3>Module 6: Real-World Projects</h3>
+                <p>Apply AI & ML techniques to industry-grade projects.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor Section -->
+    <section class="instructor">
+        <h2>Meet Your Instructor</h2>
+        <div class="instructor-card">
+            <img src="../static/images/datasciencesir.webp" alt="Instructor">
+            <h3>Dr. Jane Smith</h3>
+            <p>Data Scientist | 12+ Years of Experience</p>
+            <p>Worked with Google, IBM, and top AI firms. Passionate about teaching Data Science & AI.</p>
+        </div>
+    </section>
+
+    <!-- Student Testimonials -->
+    <section class="testimonials">
+        <h2>What Our Students Say</h2>
+        <div class="testimonial">
+            <p>“This course gave me the skills to start my career as a Data Scientist. Highly recommended!”</p>
+            <h4>⭐ ⭐ ⭐ ⭐ ⭐ - Rahul K.</h4>
+        </div>
+        <div class="testimonial">
+            <p>“Fantastic hands-on projects! I built my own AI model within weeks.”</p>
+            <h4>⭐ ⭐ ⭐ ⭐ ⭐ - Lisa M.</h4>
+        </div>
+    </section>
+
+    <!-- What’s Included -->
+    <section class="whats-included">
+        <h2>What's Included</h2>
+        <ul>
+            <li>🎥 150+ HD Video Lessons</li>
+            <li>🏆 Certificate of Completion</li>
+            <li>🔥 Live AI & ML Coding Sessions</li>
+            <li>✅ Hands-on Real-World Projects</li>
+            <li>💡 Career Assistance & Resume Reviews</li>
+        </ul>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="pricing" id="pricing">
+        <h2>Choose Your Plan</h2>
+        <div class="price-card">
+            <h3>Standard</h3>
+            <p>🎥 Self-Paced Learning</p>
+            <p>✅ Lifetime Access</p>
+            <p>💰 <strong>$69.99</strong></p>
+            <form method="POST" action="{{ url_for('add_to_cart') }}">
+                <input type="hidden" name="course_id" value="ds101">
+                <input type="hidden" name="course_name" value="Data Science Mastery">
+                <input type="hidden" name="price" value="6999">
+                <button type="submit" class="add-to-cart-btn">Add to Cart</button>
+            </form>
+        </div>
+        <div class="price-card">
+            <h3>Premium</h3>
+            <p>👨‍🏫 1-on-1 Mentorship</p>
+            <p>💡 Career Guidance & AI Projects</p>
+            <p>💰 <strong>$129.99</strong></p>
+            <button>Buy Now</button>
+        </div>
+
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>Do I need prior programming experience?</h3>
+            <p>No, this course is beginner-friendly!</p>
+        </div>
+        <div class="faq-item">
+            <h3>What tools will I learn?</h3>
+            <p>Python, Pandas, TensorFlow, SQL, and more!</p>
+        </div>
+    </section>
+
+    {% endblock %}
+
+</body>
+</html>

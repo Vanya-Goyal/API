@@ -1,0 +1,128 @@
+{% extends "home/base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="fw-bold text-primary mb-4 text-center">🎓 Instructor Dashboard</h2>
+
+  <div class="row">
+    {% for course in courses %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow border-0 rounded-4 overflow-hidden course-card">
+        {% if course.image %}
+        <img src="{{ course.image.url }}" class="card-img-top rounded-top-4" style="height: 200px; object-fit: cover;">
+        {% else %}
+        <div class="course-image-placeholder bg-gradient-{{ forloop.counter|add:1 }} d-flex align-items-center justify-content-center" style="height: 200px;">
+          <span class="text-white fs-1">{{ course.title|slice:":1" }}</span>
+        </div>
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title fw-semibold text-truncate">{{ course.title }}</h5>
+          <div class="course-description" style="height: 60px; overflow: hidden;">
+            <p class="card-text">{{ course.description|truncatewords:25 }}</p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="badge bg-success rounded-pill">₹{{ course.price }}</span>
+            <span class="badge bg-{{ course.difficulty|lower }} rounded-pill text-capitalize">
+              {{ course.difficulty|default:"All Levels" }}
+            </span>
+          </div>
+        </div>
+
+        <div class="card-footer bg-light border-top d-flex flex-wrap justify-content-between gap-2">
+          <a href="{% url 'courses:edit_course' course.id %}" class="btn btn-sm btn-outline-warning flex-grow-1">
+            ✏️ Edit
+          </a>
+          <a href="{% url 'courses:delete_course' course.id %}" class="btn btn-sm btn-outline-danger flex-grow-1">
+            🗑️ Delete
+          </a>
+          <a href="{% url 'dsa_assignments:add_assignment' course.id %}" class="btn btn-sm btn-outline-primary flex-grow-1">
+            ➕ Assignment
+          </a>
+          <a href="{% url 'instructors:manage_assignments' course.id %}" class="btn btn-sm btn-outline-success flex-grow-1">
+            📋 View
+          </a>
+        </div>
+      </div>
+    </div>
+    {% empty %}
+    <div class="col-12">
+      <div class="alert alert-info text-center">No courses found. Start by adding a new one!</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<style>
+  /* Base Card Styles */
+  .course-card {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0,0,0,0.1);
+  }
+  
+  .course-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+  }
+  
+  /* Card Title */
+  .card-title {
+    font-size: 1.25rem;
+    color: #2c3e50;
+    margin-bottom: 0.75rem;
+    font-weight: 600;
+  }
+  
+  /* Description Styles */
+  .course-description {
+    font-size: 0.9rem;
+    color: #6c757d;
+    line-height: 1.5;
+    margin-bottom: 1rem;
+  }
+  
+  /* Difficulty Badges */
+  .bg-beginner { background-color: #28a745 !important; }
+  .bg-intermediate { background-color: #ffc107 !important; color: #212529 !important; }
+  .bg-advanced { background-color: #dc3545 !important; }
+  .bg-all { background-color: #6c757d !important; }
+  
+  /* Placeholder Gradients */
+  .bg-gradient-1 { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); }
+  .bg-gradient-2 { background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); }
+  .bg-gradient-3 { background: linear-gradient(135deg, #a1c4fd 0%, #c2e9fb 100%); }
+  .bg-gradient-4 { background: linear-gradient(135deg, #84fab0 0%, #8fd3f4 100%); }
+  .bg-gradient-5 { background: linear-gradient(135deg, #ffc3a0 0%, #ffafbd 100%); }
+  .bg-gradient-6 { background: linear-gradient(135deg, #fbc2eb 0%, #a6c1ee 100%); }
+  
+  /* Button Styles */
+  .card-footer a {
+    transition: all 0.2s ease-in-out;
+    min-width: 100px;
+    text-align: center;
+  }
+  
+  .card-footer a:hover {
+    transform: scale(1.05);
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+  
+  .btn-sm {
+    font-size: 0.85rem;
+    padding: 0.25rem 0.5rem;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 768px) {
+    .card-footer {
+      flex-direction: column;
+      gap: 0.5rem;
+    }
+    
+    .card-footer a {
+      width: 100%;
+    }
+  }
+</style>
+
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'home/base.html' %}
+{% block content %}
+<div class="container mt-4">
+  <h2>Your Courses</h2>
+  <a href="{% url 'courses:add_course' %}" class="btn btn-success mb-3">Add New Course</a>
+  <ul class="list-group">
+    {% for course in courses %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <strong>{{ course.title }}</strong>
+        <div>
+          <a href="{% url 'courses:edit_course' course.id %}" class="btn btn-sm btn-warning">Edit</a>
+          <form action="{% url 'courses:delete_course' course.id %}" method="post" style="display:inline;">
+            {% csrf_token %}
+            <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+          </form>
+          <a href="{% url 'instructors:manage_assignments' course.id %}" class="btn btn-outline-secondary">Manage DSA Assignments</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="list-group-item">No courses found.</li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

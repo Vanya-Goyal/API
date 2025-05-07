@@ -1,0 +1,56 @@
+{% extends 'home/base.html' %}
+{% load static %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="row">
+    <!-- Left Side: Assignment Details -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm border-0 p-4 h-100">
+        <h3 class="text-primary mb-3">{{ assignment.title }}</h3>
+        <p><strong>📊 Difficulty:</strong> <span class="text-capitalize">{{ assignment.difficulty }}</span></p>
+        <hr>
+        <p>{{ assignment.description }}</p>
+
+        {% if submission %}
+        <hr>
+        <h5 class="mt-4">🧾 Your Previous Submission</h5>
+        <pre class="bg-light p-3 rounded code-box">{{ submission.code|linebreaks }}</pre>
+        <div class="btn-group mt-2">
+          <a href="{% url 'dsa_assignments:edit_submission' submission.id %}" class="btn btn-outline-warning">Edit</a>
+          <a href="{% url 'dsa_assignments:delete_submission' submission.id %}" class="btn btn-outline-danger">Delete</a>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+
+    <!-- Right Side: Code Submission -->
+    <div class="col-md-6 mb-4">
+      <div class="card shadow-sm border-0 p-4 h-100">
+        <h4 class="mb-3 text-success">💻 Submit Your Code</h4>
+        <!-- <form method="post" enctype="multipart/form-data">
+          {% csrf_token %}
+          <div class="mb-3">
+            {{ form.code.label_tag }}
+            {{ form.code|add_class:"form-control code-box" }}
+          </div>
+          <button type="submit" class="btn btn-success w-100">
+            <i class="fas fa-upload me-1"></i> Submit Code
+          </button>
+        </form> -->
+        <form method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="mb-3">
+              {{ form.code.label_tag }}
+              {{ form.code|add_class:"form-control code-box" }}
+            </div>
+            <button type="submit" class="btn btn-success">
+              <i class="fas fa-upload me-1"></i> Submit Code
+            </button>
+          </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

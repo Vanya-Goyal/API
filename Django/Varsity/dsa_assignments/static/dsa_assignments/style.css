@@ -1,0 +1,53 @@
+.badge.easy { background-color: #28a745; }
+.badge.medium { background-color: #ffc107; }
+.badge.hard { background-color: #dc3545; }
+
+
+pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-family: Consolas, monospace;
+}
+.code-box {
+    font-family: 'Courier New', monospace;
+    min-height: 200px;
+    background-color: #f6f8fa;
+    border: 1px solid #d0d7de;
+    padding: 10px;
+    border-radius: 6px;
+    resize: vertical;
+}
+
+.code-preview {
+    font-family: 'Courier New', monospace;
+    background-color: #f6f8fa;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #d0d7de;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+.code-box {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    min-height: 250px;
+    border-radius: 5px;
+    padding: 10px;
+    resize: vertical;
+    white-space: pre-wrap;
+  }
+  .code-box {
+    font-family: 'Courier New', monospace;
+    font-size: 14px;
+    min-height: 250px;
+    background-color: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    padding: 10px;
+    resize: vertical;
+    white-space: pre-wrap;
+  }
+  

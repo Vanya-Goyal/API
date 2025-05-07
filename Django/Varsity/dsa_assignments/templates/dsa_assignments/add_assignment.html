@@ -1,0 +1,59 @@
+{% extends "home/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4 p-4">
+    <h2 class="fw-bold text-primary mb-4">
+      🧩 Add Assignment for: <span class="text-dark">{{ course.title }}</span>
+    </h2>
+
+    <form method="post">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="id_title" class="form-label fw-semibold">Assignment Title</label>
+        {{ form.title|add_class:"form-control" }}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_description" class="form-label fw-semibold">Description</label>
+        {{ form.description|add_class:"form-control" }}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_difficulty" class="form-label fw-semibold">Difficulty</label>
+        {{ form.difficulty|add_class:"form-select" }}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_due_date" class="form-label fw-semibold">Due Date</label>
+        {{ form.due_date|add_class:"form-control" }}
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-success btn-lg">
+          <i class="fas fa-plus-circle me-2"></i> Add Assignment
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+<style>
+  .form-label {
+    color: #343a40;
+  }
+
+  .form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+
+  button:hover {
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+  }
+</style>
+{% endblock %}

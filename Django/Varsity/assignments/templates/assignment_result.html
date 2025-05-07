@@ -1,0 +1,50 @@
+{% extends 'home/base.html' %}
+{% load custom_tags %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card shadow p-4">
+        <h2 class="mb-4">{{ assignment.title }} - Result</h2>
+
+        <div class="alert alert-info">
+            <strong>Your Score:</strong> {{ score }} / 100
+        </div>
+
+        <hr>
+
+        {% for question in questions %}
+            {% with selected_option=selected_answers|get_item:question.id|stringformat:"s" %}
+            <div class="mb-4">
+                <h5>Q{{ forloop.counter }}. {{ question.text }}</h5>
+                <ul class="list-group">
+                    {% for option in question.options.all %}
+                        <li class="list-group-item
+                            {% if option.id|stringformat:"s" == selected_option %}
+                                {% if option.is_correct %}
+                                    list-group-item-success
+                                {% else %}
+                                    list-group-item-danger
+                                {% endif %}
+                            {% elif option.is_correct %}
+                                list-group-item-success
+                            {% endif %}
+                        ">
+                            <input type="radio" disabled 
+                                   {% if option.id|stringformat:"s" == selected_option %}checked{% endif %}>
+                            {{ option.text }}
+                            {% if option.is_correct %}
+                                <strong class="text-success">(Correct Answer)</strong>
+                            {% endif %}
+                            {% if option.id|stringformat:"s" == selected_option and not option.is_correct %}
+                                <strong class="text-danger">(Your Answer)</strong>
+                            {% endif %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+            {% endwith %}
+        {% endfor %}
+
+        <a href="{% url 'assignments:assignment_list' assignment.course.id %}" class="btn btn-primary mt-3">Back to Assignments</a>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,504 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Varsity</title>
+
+  <link rel="stylesheet" href="{% static 'global/css/style.css' %}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'dsa_assignments/style.css' %}">
+  <link rel="stylesheet" href="{% static 'courses/style.css' %}">
+  <link rel="stylesheet" href="{% static 'accounts/style.css' %}">
+  <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  {% block extra_css %}{% endblock %}
+  <style>
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    .nav-link {
+      font-size: 1rem;
+    }
+
+    .initial-circle {
+      background-color: #0d6efd;
+      color: white;
+      border-radius: 50%;
+      width: 35px;
+      height: 35px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+    }
+    
+    /* General Styles */
+    html, body {
+        height: 100%;
+        font-family: Arial, sans-serif;
+        background-color: #EEEEEE;
+        margin: 0;
+        padding: 0;
+    }
+
+    /* Ensure full width for navbar and footer */
+    .navbar,
+    footer {
+        width: 100%;
+    }
+    .navbar{
+        background-color: #3B1E54;
+    }
+    
+    /* User dropdown button */
+    /* User initial circle */
+    /* Adjust the dropdown parent item */
+    .nav-item.dropdown {
+        display: flex;
+        align-items: center;
+        height: 100%;
+        /* Match navbar height */
+    }
+
+    /* User dropdown button */
+    .user-dropdown {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        padding: 0 !important;
+        /* Remove default padding */
+    }
+
+    /* Remove default Bootstrap nav-link padding */
+    .navbar-nav .nav-link {
+        padding: 0;
+    }
+
+    .user-initial {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #D4BEE4;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Dropdown menu styling */
+    .dropdown-menu {
+        min-width: 200px;
+    }
+
+    .dropdown-menu a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+    }
+
+    .user-dropdown {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #9B7EBD;
+        color: white;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        text-align: center;
+        font-size: 18px;
+        font-weight: bold;
+    }
+
+    /* Hover effect */
+    .user-dropdown:hover {
+        background-color: #9B7EBD;
+        color: white;
+    }
+
+    /* Dropdown menu styling */
+    .dropdown-menu {
+        min-width: 200px;
+    }
+
+    .dropdown-menu a {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+    }
+
+    /* Ensure page takes full height */
+    .page-wrapper {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+    }
+
+    /* Main content area that grows */
+    .main-content {
+        flex: 1;
+    }
+
+    /* Push content down to center */
+    .content-wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #EEEEEE;
+    }
+
+    /* Hero Section */
+    .hero-section {
+        background: linear-gradient(rgba(59, 30, 84, 0.8), rgba(59, 30, 84, 0.8)), 
+                    url('https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+        background-size: cover;
+        background-position: center;
+        color: white;
+        padding: 100px 0;
+        text-align: center;
+    }
+
+    .hero-section h1 {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+
+    .hero-section p {
+        font-size: 1.2rem;
+        margin-bottom: 30px;
+    }
+
+    .btn-primary {
+        background-color: #9B7EBD;
+        border-color: #9B7EBD;
+    }
+
+    .btn-primary:hover {
+        background-color: #7D5D9D;
+        border-color: #7D5D9D;
+    }
+
+    /* Course Categories */
+    .categories-section {
+        padding: 60px 0;
+    }
+
+    .category-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+    }
+
+    .category-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .category-card img {
+        width: 100%;
+        height: 150px;
+        object-fit: cover;
+        border-radius: 5px;
+        margin-bottom: 15px;
+    }
+
+    /* Testimonials */
+    .testimonials-section {
+        background-color: #f8f9fa;
+        padding: 60px 0;
+    }
+
+    .testimonial-card {
+        background: white;
+        border-radius: 10px;
+        padding: 20px;
+        margin-bottom: 20px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .testimonial-img {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        object-fit: cover;
+        margin-bottom: 15px;
+    }
+
+    /* Stats Section */
+    .stats-section {
+        padding: 60px 0;
+        background-color: #3B1E54;
+        color: white;
+    }
+
+    .stat-item {
+        text-align: center;
+        padding: 20px;
+    }
+
+    .stat-number {
+        font-size: 2.5rem;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
+
+    /* Footer styles */
+    footer {
+        background-color: #101315;
+        color: #fff;
+        padding: 20px;
+        margin-top: auto;
+    }
+
+    .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .footer-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 15px 0;
+        border-bottom: 1px solid #444;
+    }
+
+    .footer-top .highlight {
+        color: #9B7EBD;
+    }
+
+    .footer-logos img {
+        width: 80px;
+        margin: 0 5px;
+    }
+
+    .footer-links {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+        gap: 20px;
+        padding: 20px 0;
+    }
+
+    .footer-column h3 {
+        font-size: 16px;
+        margin-bottom: 10px;
+    }
+
+    .footer-column a {
+        display: block;
+        color: #ccc;
+        font-size: 14px;
+        text-decoration: none;
+        margin-bottom: 5px;
+    }
+
+    .footer-column a:hover {
+        color: #fff;
+    }
+
+    .footer-bottom {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-top: 15px;
+        border-top: 1px solid #444;
+        font-size: 14px;
+    }
+
+    .footer-bottom a {
+        color: #ccc;
+        text-decoration: none;
+        margin-left: 15px;
+    }
+
+    .footer-bottom a:hover {
+        color: #fff;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .footer-top {
+            flex-direction: column;
+            text-align: center;
+        }
+
+        .footer-logos img {
+            width: 60px;
+        }
+
+        .footer-links {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            text-align: center;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+        .footer-links {
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            text-align: center;
+        }
+
+        .footer-bottom {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page-wrapper">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark px-4">
+      <a class="navbar-brand" href="/">Varsity</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarContent">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'courses:course_list' %}">Courses</a>
+          </li>
+
+          {% if user.is_authenticated %}
+          {% if user.role == 'instructor' or user.is_superuser %}
+          <!-- Instructor Links -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'courses:add_course' %}"><i class="fas fa-plus"></i> Add Course</a>
+          </li>
+
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'feedback:feedback' %}"><i class="fas fa-video"></i>Feedback</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'instructors:dashboard' %}">Dashboard</a>
+          </li>
+          {% else %}
+          <!-- Student Links -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'cart:view_cart' %}"><i class="fas fa-shopping-cart"></i></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:student_dashboard' %}">Dashboard</a>
+          </li>
+          {% endif %}
+
+          <!-- Common for Authenticated Users -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="navbarDropdown" role="button"
+              data-bs-toggle="dropdown">
+              <div class="initial-circle me-2">{{ user.first_name|slice:":1"|default:user.username|slice:":1" }}</div>
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              {% if user.role == 'student' and not user.is_superuser %}
+              <li><a class="dropdown-item" href="{% url 'cart:view_cart' %}">🛒 View Cart</a></li>
+              {% endif %}
+              <li><a class="dropdown-item" href="{% url 'accounts:logout' %}">🚪 Logout</a></li>
+            </ul>
+          </li>
+
+          {% else %}
+          <!-- Not Logged In -->
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:login' %}">Login</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{% url 'accounts:signup' %}">Signup</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </nav>
+
+    <main class="main-content">
+      {% block content %}
+
+      {% endblock %}
+    </main>
+
+    <footer>
+      <div class="footer-container">
+        <div class="footer-top">
+          <p><strong>Top companies choose <span class="highlight">Varsity</span> to build in-demand career skills.</strong></p>
+          <div class="footer-logos">
+            
+            <img src="{% static 'images/Nasdaq-light.svg' %}" alt="Nasdaq" style="width: 100px;">
+            <img src="{% static 'images/volkswagen-light.svg' %}" alt="Volkswagen" style="width: 30px;">
+            <img src="{% static 'images/box-light.svg' %}" style="width: 60px;">
+            <img src="{% static 'images/netapp-light.svg' %}"alt="NetApp" style="width: 100px;">
+            <img src="{% static 'images/eventbrite-light.svg' %}" alt="Eventbrite" style="width: 100px;">
+          </div>
+        </div>
+
+        <div class="footer-links">
+          <div class="footer-column">
+            <h3>Certifications by Issuer</h3>
+            <a href="#">AWS Certifications</a>
+            <a href="#">Six Sigma Certifications</a>
+            <a href="#">Microsoft Certifications</a>
+            <a href="#">Cisco Certifications</a>
+            <a href="#">Tableau Certifications</a>
+            <a href="#">See all Certifications</a>
+          </div>
+          <div class="footer-column">
+            <h3>Web Development</h3>
+            <a href="#">Web Development</a>
+            <a href="#">JavaScript</a>
+            <a href="#">React JS</a>
+            <a href="#">Angular</a>
+            <a href="#">Java</a>
+          </div>
+          <div class="footer-column">
+            <h3>IT Certifications</h3>
+            <a href="#">Amazon AWS</a>
+            <a href="#">AWS Certified Cloud Practitioner</a>
+            <a href="#">Microsoft Azure Fundamentals</a>
+            <a href="#">AWS Solutions Architect</a>
+            <a href="#">Kubernetes</a>
+          </div>
+          <div class="footer-column">
+            <h3>Leadership</h3>
+            <a href="#">Leadership</a>
+            <a href="#">Management Skills</a>
+            <a href="#">Project Management</a>
+            <a href="#">Personal Productivity</a>
+            <a href="#">Emotional Intelligence</a>
+          </div>
+        </div>
+
+        <div class="footer-bottom">
+          <p>© 2025 Varsity, Inc.</p>
+          <div>
+            <a href="#">Privacy Policy</a>
+            <a href="#">Sitemap</a>
+            <a href="#">Terms</a>
+            <a href="#">Cookie Settings</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4 p-4">
+    <h2 class="fw-bold text-primary mb-4">
+      🧩 Add Assignment for: <span class="text-dark">{{ course.title }}</span>
+    </h2>
+
+    <form method="POST">
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Assignment Title</label>
+        <input type="text" name="title" class="form-control" required>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Description</label>
+        <textarea name="description" class="form-control" required></textarea>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Difficulty</label>
+        <select name="difficulty" class="form-select" required>
+          <option value="Easy">Easy</option>
+          <option value="Medium">Medium</option>
+          <option value="Hard">Hard</option>
+        </select>
+      </div>
+
+      <div class="mb-3">
+        <label class="form-label fw-semibold">Due Date</label>
+        <input type="text" name="due_date" class="form-control" placeholder="YYYY-MM-DD HH:MM:SS">
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-success btn-lg">
+          <i class="fas fa-plus-circle me-2"></i> Add Assignment
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<style>
+  .form-label {
+    color: #343a40;
+  }
+
+  .form-control:focus, .form-select:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+
+  button:hover {
+    transform: scale(1.01);
+    transition: all 0.2s ease-in-out;
+  }
+</style>
+{% endblock %}

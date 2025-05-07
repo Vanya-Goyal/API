@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- feedback_list.html -->
+<div class="feedback-list">
+    <h2>Recent Feedback</h2>
+    {% if feedbacks %}
+        {% for feedback in feedbacks %}
+        <div class="feedback-item">
+            <div class="feedback-header">
+                <span class="feedback-course">{{ feedback.course_title }}</span>
+                <span class="feedback-rating">
+                    {% for _ in feedback.rating %}
+                        ★
+                    {% endfor %}
+                </span>
+            </div>
+            <p class="feedback-comment">{{ feedback.comment }}</p>
+            <div class="feedback-footer">
+                <span class="feedback-date">{{ feedback.timestamp }}</span>
+                <div class="feedback-actions">
+                    <a href="{% url 'edit_feedback' feedback.id %}" class="btn">Edit</a>
+                    <a href="{% url 'delete_feedback' feedback.id %}" class="btn btn-danger">Delete</a>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p>No feedback found.</p>
+    {% endif %}
+</div>
+</body>
+</html>

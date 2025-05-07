@@ -1,0 +1,312 @@
+/* Import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #ffffff; /* White background */
+    color: #1c1d1f; /* Udemy text color */
+    margin: 0;
+    padding: 0;
+}
+
+/* ======= HERO SECTION ======= */
+.hero {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #3B1E54; /* Udemy Purple */
+    color: white;
+    padding: 60px 8%;
+}
+
+.hero-content {
+    max-width: 50%;
+}
+
+.hero-content h1 {
+    font-size: 2.8rem;
+    font-weight: 700;
+    margin-bottom: 15px;
+}
+
+.hero-content p {
+    font-size: 1.2rem;
+    margin-bottom: 15px;
+}
+
+.course-details {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+.course-details li {
+    margin-bottom: 5px;
+}
+
+.enroll-btn {
+    display: inline-block;
+    background: #ffd166; /* Udemy Yellow */
+    color: #1c1d1f;
+    padding: 12px 20px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    transition: 0.3s;
+}
+
+.enroll-btn:hover {
+    background: #ffae00; /* Darker yellow */
+}
+
+.hero-image img {
+    width: 450px;
+}
+
+/* ======= ABOUT COURSE ======= */
+.about-course {
+    text-align: center;
+    padding: 50px 10%;
+}
+
+.about-course h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.about-course p {
+    font-size: 1.2rem;
+    max-width: 800px;
+    margin: 10px auto;
+}
+
+.about-course ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+.about-course ul li {
+    margin-bottom: 8px;
+}
+
+/* ======= CURRICULUM SECTION ======= */
+.curriculum {
+    background: #f9f9f9;
+    padding: 50px 10%;
+    text-align: center;
+}
+
+.curriculum h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.module {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: 0.3s;
+}
+
+.module:hover {
+    transform: translateY(-5px);
+}
+
+/* ======= INSTRUCTOR SECTION ======= */
+.instructor {
+    text-align: center;
+    padding: 50px 10%;
+}
+
+.instructor h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.instructor-card {
+    display: inline-block;
+    background: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.instructor-card img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    margin-bottom: 15px;
+}
+
+.instructor-card h3 {
+    font-size: 1.5rem;
+    color: #3B1E54;
+}
+
+/* ======= TESTIMONIALS ======= */
+.testimonials {
+    background: #f9f9f9;
+    text-align: center;
+    padding: 50px 10%;
+}
+
+.testimonials h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.testimonial {
+    background: white;
+    padding: 20px;
+    margin: 10px auto;
+    max-width: 600px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.testimonial h4 {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+/* ======= WHAT'S INCLUDED ======= */
+.whats-included {
+    text-align: center;
+    padding: 50px 10%;
+}
+
+.whats-included h2 {
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.whats-included ul {
+    list-style: none;
+    padding: 0;
+    font-size: 1.1rem;
+}
+
+.whats-included li {
+    margin-bottom: 10px;
+}
+
+/* ======= PRICING SECTION ======= */
+.pricing {
+    background: #f9f9f9;
+    text-align: center;
+    padding: 50px 10%;
+}
+
+.pricing h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.price-card {
+    display: inline-block;
+    background: white;
+    padding: 20px;
+    margin: 10px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.price-card h3 {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.price-card p {
+    font-size: 1.1rem;
+    margin: 10px 0;
+}
+
+.price-card strong {
+    font-size: 1.5rem;
+    color: #3B1E54;
+}
+
+.price-card button {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background: #3B1E54;
+    color: white;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.price-card button:hover {
+    background: #9B7EBD;
+}
+
+/* ======= FAQ SECTION ======= */
+.faq {
+    text-align: center;
+    padding: 50px 10%;
+}
+
+.faq h2 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.faq-item {
+    max-width: 600px;
+    margin: 10px auto;
+    text-align: left;
+    background: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.faq-item h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+/* ======= RESPONSIVE DESIGN ======= */
+@media (max-width: 900px) {
+    .hero {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .hero-content {
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    .hero-image img {
+        width: 100%;
+    }
+
+    .modules {
+        grid-template-columns: 1fr;
+    }
+
+    .instructor-card {
+        max-width: 90%;
+    }
+}

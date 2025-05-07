@@ -1,0 +1,9 @@
+{% extends "home/base.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="alert alert-success">
+        ✅ Payment Successful! You've purchased the course(s).
+    </div>
+    <a href="{% url 'courses:course_list' %}" class="btn btn-secondary">Back to Courses</a>
+</div>
+{% endblock %}

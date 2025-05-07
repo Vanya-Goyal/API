@@ -1,0 +1,294 @@
+{% extends "home/base.html" %}
+{% block title %}Login{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+  <div class="auth-card">
+    <div class="auth-header">
+      <h2 class="auth-title">Welcome Back</h2>
+      <p class="auth-subtitle">Sign in to continue your learning journey</p>
+    </div>
+    
+    <form method="POST" class="auth-form">
+      {% csrf_token %}
+      
+      {% if form.errors %}
+        <div class="alert alert-danger">
+          Invalid username or password. Please try again.
+        </div>
+      {% endif %}
+      
+      <div class="form-group">
+        <label for="username">Email</label>
+        <div class="input-with-icon">
+          <i class="fas fa-user"></i>
+          <input type="text" name="username" id="username" class="form-control" placeholder="Enter your username or email" required>
+        </div>
+      </div>
+      
+      <div class="form-group">
+        <label for="password">Password</label>
+        <div class="input-with-icon">
+          <i class="fas fa-lock"></i>
+          <input type="password" name="password" id="password" class="form-control" placeholder="Enter your password" required>
+          <i class="fas fa-eye toggle-password" onclick="togglePassword()"></i>
+        </div>
+        <div class="text-end mt-2">
+          <a href="#" class="forgot-password">Forgot password?</a>
+        </div>
+      </div>
+      
+      <button type="submit" class="btn btn-primary auth-btn">
+        <i class="fas fa-sign-in-alt"></i> Login
+      </button>
+      
+      <div class="auth-divider">
+        <span>or</span>
+      </div>
+      
+      <div class="social-auth">
+        <button type="button" class="btn btn-social google">
+          <i class="fab fa-google"></i> Continue with Google
+        </button>
+        <button type="button" class="btn btn-social facebook">
+          <i class="fab fa-facebook-f"></i> Continue with Facebook
+        </button>
+      </div>
+    </form>
+    
+    <div class="auth-footer">
+      <p>Don't have an account? <a href="{% url 'accounts:signup' %}" class="auth-link">Sign up</a></p>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Auth Container */
+  .auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+    padding: 20px;
+  }
+  
+  /* Auth Card */
+  .auth-card {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 450px;
+    padding: 40px;
+    animation: fadeIn 0.5s ease;
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  
+  /* Auth Header */
+  .auth-header {
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  
+  .auth-title {
+    font-size: 28px;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 8px;
+  }
+  
+  .auth-subtitle {
+    color: #7f8c8d;
+    font-size: 16px;
+  }
+  
+  /* Form Styles */
+  .auth-form {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 25px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 500;
+    color: #2c3e50;
+    font-size: 14px;
+  }
+  
+  .input-with-icon {
+    position: relative;
+  }
+  
+  .input-with-icon i {
+    position: absolute;
+    top: 50%;
+    left: 15px;
+    transform: translateY(-50%);
+    color: #95a5a6;
+    font-size: 16px;
+  }
+  
+  .input-with-icon .toggle-password {
+    left: auto;
+    right: 15px;
+    cursor: pointer;
+  }
+  
+  .form-control {
+    width: 100%;
+    padding: 14px 15px 14px 45px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 15px;
+    transition: all 0.3s;
+  }
+  
+  .form-control:focus {
+    border-color: #3498db;
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.1);
+    outline: none;
+  }
+  
+  /* Button Styles */
+  .auth-btn {
+    width: 100%;
+    padding: 14px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: 8px;
+    margin: 15px 0;
+    transition: all 0.3s;
+    background-color: #3498db;
+    border: none;
+  }
+  
+  .auth-btn:hover {
+    background-color: #2980b9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(41, 128, 185, 0.2);
+  }
+  
+  /* Divider */
+  .auth-divider {
+    display: flex;
+    align-items: center;
+    margin: 20px 0;
+    color: #95a5a6;
+    font-size: 14px;
+  }
+  
+  .auth-divider::before,
+  .auth-divider::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: #e0e0e0;
+    margin: 0 10px;
+  }
+  
+  /* Social Auth */
+  .social-auth {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 20px;
+  }
+  
+  .btn-social {
+    width: 100%;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    transition: all 0.3s;
+    font-size: 15px;
+  }
+  
+  .btn-social.google {
+    background-color: #fff;
+    color: #db4437;
+    border: 1px solid #e0e0e0;
+  }
+  
+  .btn-social.google:hover {
+    background-color: #f5f5f5;
+  }
+  
+  .btn-social.facebook {
+    background-color: #1877f2;
+    color: white;
+    border: 1px solid #1877f2;
+  }
+  
+  .btn-social.facebook:hover {
+    background-color: #166fe5;
+  }
+  
+  /* Footer Styles */
+  .auth-footer {
+    text-align: center;
+    margin-top: 20px;
+    color: #7f8c8d;
+    font-size: 15px;
+  }
+  
+  .auth-link {
+    color: #3498db;
+    text-decoration: none;
+    font-weight: 500;
+  }
+  
+  .auth-link:hover {
+    text-decoration: underline;
+  }
+  
+  .forgot-password {
+    color: #7f8c8d;
+    font-size: 14px;
+    text-decoration: none;
+  }
+  
+  .forgot-password:hover {
+    color: #3498db;
+    text-decoration: underline;
+  }
+  
+  /* Responsive Adjustments */
+  @media (max-width: 576px) {
+    .auth-card {
+      padding: 30px 20px;
+    }
+    
+    .auth-title {
+      font-size: 24px;
+    }
+  }
+</style>
+
+<script>
+  function togglePassword() {
+    const passwordField = document.getElementById('password');
+    const eyeIcon = document.querySelector('.toggle-password');
+    
+    if (passwordField.type === 'password') {
+      passwordField.type = 'text';
+      eyeIcon.classList.replace('fa-eye', 'fa-eye-slash');
+    } else {
+      passwordField.type = 'password';
+      eyeIcon.classList.replace('fa-eye-slash', 'fa-eye');
+    }
+  }
+</script>
+{% endblock %}

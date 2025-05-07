@@ -1,0 +1,52 @@
+<!-- {{type}}
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+    <link rel="stylesheet" href="{% static 'home/css/style.css' %}">
+</head>
+<body>
+    <div class="container">
+        <h2>Login</h2>
+        <form method="post">
+            {% csrf_token %}
+            <input type="text" name="username" placeholder="Username"><br>
+            <input type="password" name="password" placeholder="Password"><br>
+            <button type="submit">Login</button>
+        </form>
+    </div>
+</body>
+</html> -->
+
+<form method="post">
+    {% csrf_token %}
+  
+    <div class="mb-3">
+      {{ form.username.label_tag }}
+      {{ form.username }}
+    </div>
+  
+    <div class="mb-3">
+      {{ form.email.label_tag }}
+      {{ form.email }}
+    </div>
+  
+    <div class="mb-3">
+      {{ form.password1.label_tag }}
+      {{ form.password1 }}
+    </div>
+  
+    <div class="mb-3">
+      {{ form.password2.label_tag }}
+      {{ form.password2 }}
+    </div>
+  
+    <div class="mb-3">
+      {{ form.role.label_tag }}
+      {{ form.role }}
+    </div>
+  
+    <button type="submit" class="btn btn-primary">Sign Up</button>
+  </form>
+  

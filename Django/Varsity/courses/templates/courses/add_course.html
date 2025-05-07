@@ -1,0 +1,63 @@
+{% extends "home/base.html" %}
+{% load widget_tweaks %}
+
+{% block content %}
+<div class="container mt-5">
+  <div class="card shadow-lg border-0 rounded-4 p-4">
+    <h2 class="mb-4 fw-bold text-primary">
+      <i class="fas fa-plus-circle me-2"></i> Add New Course
+    </h2>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+
+      <div class="mb-3">
+        <label for="id_title" class="form-label fw-semibold">Course Title</label>
+        {{ form.title|add_class:"form-control" }}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_description" class="form-label fw-semibold">Description</label>
+        {{ form.description|add_class:"form-control" }}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_price" class="form-label fw-semibold">Price (USD)</label>
+        {{ form.price|add_class:"form-control" }}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_category" class="form-label fw-semibold">Category</label>
+        {{ form.category|add_class:"form-control" }}
+      </div>
+
+      <div class="mb-3">
+        <label for="id_image" class="form-label fw-semibold">Course Image</label>
+        {{ form.image|add_class:"form-control" }}
+      </div>
+
+      <div class="d-grid mt-4">
+        <button type="submit" class="btn btn-success btn-lg">
+          <i class="fas fa-check-circle me-2"></i> Create Course
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Optional styling tweaks -->
+<style>
+  .form-label {
+    color: #495057;
+  }
+
+  .form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+    border-color: #86b7fe;
+  }
+
+  button:hover {
+    transform: scale(1.01);
+  }
+</style>
+{% endblock %}

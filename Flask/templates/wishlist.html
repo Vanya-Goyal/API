@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    {% extends 'base.html' %}
+
+{% block content %}
+<div class="container my-5">
+    <h2>My Wishlist ❤️</h2>
+    {% if wishlist_items %}
+        <div class="row">
+            {% for item in wishlist_items %}
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="{{ item.course.image_url }}" class="card-img-top" alt="Course Image">
+                        <div class="card-body">
+                            <h5 class="card-title">{{ item.course.title }}</h5>
+                            <p class="card-text">{{ item.course.description }}</p>
+                            <a href="{{ url_for('course_detail', course_id=item.course.id) }}" class="btn btn-info">View Course</a>
+                            <form action="{{ url_for('remove_from_wishlist', course_id=item.course.id) }}" method="POST" class="d-inline">
+                                <button type="submit" class="btn btn-danger">Remove ❌</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <p>No courses in your wishlist yet!</p>
+    {% endif %}
+</div>
+{% endblock %}
+
+</body>
+</html>

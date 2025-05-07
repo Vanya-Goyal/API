@@ -1,0 +1,508 @@
+{% extends 'home/base.html' %}
+
+{% block title %}{{ course.title }} Quiz{% endblock %}
+{% block content %}
+<style>
+/* Light & Airy Quiz Page Styles - Optimized Version */
+
+:root {
+    /* Modern color palette with better accessibility */
+    --primary: #5e35b1;  /* Adjusted purple for better readability */
+    --primary-light: #9162e4;
+    --primary-dark: #4527a0;
+    --secondary: #00acc1;  /* Adjusted teal */
+    --accent: #f50057;  /* Optimized pink */
+    --neutral-50: #fafafa;
+    --neutral-100: #f5f5f5;
+    --neutral-200: #eeeeee;
+    --neutral-300: #e0e0e0;
+    --neutral-600: #757575;
+    --neutral-700: #616161;
+    --neutral-800: #424242;
+    --neutral-900: #212121;
+    --success: #00c853;
+    --warning: #ffab00;
+    --danger: #f44336;
+    --info: #2196f3;
+    
+    /* Typography */
+    --font-heading: 'Nunito Sans', system-ui, sans-serif;
+    --font-body: 'Nunito Sans', system-ui, sans-serif;
+    
+    /* Optimized shadows */
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.07);
+    --shadow-lg: 0 6px 12px rgba(0, 0, 0, 0.08);
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.09);
+    
+    /* Refined borders */
+    --border-radius-sm: 8px;
+    --border-radius-md: 12px;
+    --border-radius-lg: 16px;
+    --border-radius-xl: 24px;
+    
+    /* Layout */
+    --container-padding: clamp(1rem, 5vw, 2rem);
+    --section-spacing: clamp(2rem, 8vh, 4rem);
+    --item-spacing: clamp(1rem, 4vh, 2rem);
+}
+
+/* Base styles */
+body {
+    font-family: var(--font-body);
+    background-color: var(--neutral-50);
+    color: var(--neutral-800);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    margin: 0;
+    padding: 0;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 var(--container-padding);
+    position: relative;
+    z-index: 1;
+}
+
+/* Full-page layout */
+.quiz-container {
+    min-height: 100vh;
+    background: linear-gradient(135deg, var(--neutral-50) 0%, var(--neutral-100) 100%);
+    padding: 0;
+    position: relative;
+}
+
+/* Subtle background pattern */
+.quiz-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.4;
+    z-index: 0;
+    pointer-events: none;
+}
+
+/* Course header */
+.course-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: clamp(3rem, 10vh, 5rem) 0 clamp(2rem, 8vh, 4rem);
+    margin-bottom: var(--section-spacing);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(69, 39, 160, 0.25);
+}
+
+.course-header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 6px;
+    background: linear-gradient(90deg, var(--accent), var(--secondary), var(--primary-light));
+    opacity: 0.8;
+}
+
+.course-title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.75rem, 5vw, 3rem);
+    font-weight: 800;
+    margin-bottom: 1rem;
+    letter-spacing: -0.02em;
+    position: relative;
+    text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Text alignment utility */
+.text-center {
+    text-align: center;
+}
+
+/* Section styles */
+.section-title {
+    color: var(--primary-dark);
+    font-family: var(--font-heading);
+    font-size: clamp(1.5rem, 4vw, 1.75rem);
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.section-title::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 4px;
+    background: linear-gradient(90deg, var(--accent), var(--primary-light));
+    border-radius: 2px;
+}
+
+/* Content sections */
+.quiz-content,
+.certifications-section {
+    background: white;
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-lg);
+    padding: clamp(2rem, 5vw, 3.5rem);
+    margin-bottom: var(--section-spacing);
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    position: relative;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.quiz-content:hover,
+.certifications-section:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+}
+
+/* Section accent lines */
+.quiz-content::before,
+.certifications-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(90deg, var(--secondary), var(--primary-light));
+}
+
+.certifications-section::before {
+    background: linear-gradient(90deg, var(--primary), var(--accent));
+}
+
+/* Questions grid */
+.questions-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 320px), 1fr));
+    gap: var(--item-spacing);
+}
+
+/* Question items */
+.question-item {
+    background-color: white;
+    border-radius: var(--border-radius-md);
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.04);
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 180px;
+}
+
+.question-item:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-lg);
+    border-color: rgba(94, 53, 177, 0.15);
+}
+
+/* Question item left border accent */
+.question-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 4px;
+    height: 0;
+    background: linear-gradient(to bottom, var(--accent), var(--primary));
+    transition: height 0.3s ease;
+}
+
+.question-item:hover::before {
+    height: 100%;
+}
+
+.question-text {
+    font-weight: 600;
+    color: var(--neutral-800);
+    margin-bottom: 1.5rem;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    flex-grow: 1;
+}
+
+/* Button styles */
+.view-details-btn {
+    background: var(--secondary);
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border-radius: var(--border-radius-sm);
+    font-weight: 600;
+    text-decoration: none;
+    border: none;
+    display: inline-block;
+    text-align: center;
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.view-details-btn:hover,
+.view-details-btn:focus {
+    background: linear-gradient(135deg, #00b2cc 0%, var(--secondary) 100%);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 15px rgba(0, 172, 193, 0.25);
+}
+
+/* Focus styles for accessibility */
+.view-details-btn:focus-visible {
+    outline: 3px solid rgba(0, 172, 193, 0.5);
+    outline-offset: 2px;
+}
+
+/* Certification section */
+.certifications-title {
+    color: var(--primary);
+    font-family: var(--font-heading);
+    font-size: clamp(1.25rem, 3vw, 1.5rem);
+    font-weight: 700;
+    margin-bottom: 2rem;
+    text-align: center;
+    position: relative;
+    padding-bottom: 1rem;
+}
+
+.certifications-title::after {
+    content: "";
+    width: 100px;
+    height: 4px;
+    background: linear-gradient(to right, var(--primary), var(--accent));
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    border-radius: 2px;
+}
+
+/* Certification tabs */
+.certification-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    background: linear-gradient(to right, var(--primary-dark), var(--primary));
+    color: white;
+    border-radius: var(--border-radius-md);
+    padding: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.certification-tabs div {
+    padding: 0.75rem 1.25rem;
+    font-weight: 600;
+    cursor: pointer;
+    border-radius: var(--border-radius-sm);
+    transition: background-color 0.2s ease, transform 0.2s ease;
+}
+
+.certification-tabs div:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Table styles */
+.certifications-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: var(--border-radius-md);
+    overflow: hidden;
+    box-shadow: var(--shadow-md);
+}
+
+.certifications-table th {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: white;
+    padding: 1.25rem 1.5rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 0.95rem;
+    letter-spacing: 0.03em;
+}
+
+.certifications-table td {
+    padding: 1rem 1.5rem;
+    border-bottom: 1px solid var(--neutral-200);
+    color: var(--neutral-800);
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+}
+
+.certifications-table tr:last-child td {
+    border-bottom: none;
+}
+
+.certifications-table tr:hover td {
+    background-color: rgba(94, 53, 177, 0.05);
+}
+
+/* Card styles */
+.card {
+    border-radius: var(--border-radius-lg);
+    box-shadow: var(--shadow-md);
+    padding: 1.5rem;
+    background: white;
+    margin-bottom: 1.5rem;
+}
+
+/* Assignment box */
+.assignment-box {
+    background: var(--neutral-100);
+    border-radius: var(--border-radius-md);
+    padding: 1.25rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+.assignment-box h5 {
+    font-weight: 600;
+    color: var(--neutral-800);
+    margin-top: 0;
+    margin-bottom: 0.75rem;
+}
+
+/* Optimized animations */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Apply animations more selectively */
+.quiz-content {
+    animation: fadeInUp 0.5s ease-out forwards;
+}
+
+.certifications-section {
+    animation: fadeInUp 0.5s ease-out 0.2s forwards;
+}
+
+/* Stagger question items with reduced delay */
+@media (prefers-reduced-motion: no-preference) {
+    .question-item {
+        opacity: 0;
+    }
+    
+    .question-item:nth-child(1) { animation: fadeInUp 0.4s ease-out 0.1s forwards; }
+    .question-item:nth-child(2) { animation: fadeInUp 0.4s ease-out 0.15s forwards; }
+    .question-item:nth-child(3) { animation: fadeInUp 0.4s ease-out 0.2s forwards; }
+    .question-item:nth-child(4) { animation: fadeInUp 0.4s ease-out 0.25s forwards; }
+    .question-item:nth-child(5) { animation: fadeInUp 0.4s ease-out 0.3s forwards; }
+    .question-item:nth-child(6) { animation: fadeInUp 0.4s ease-out 0.35s forwards; }
+    .question-item:nth-child(n+7) { animation: fadeInUp 0.4s ease-out 0.4s forwards; }
+}
+
+/* For users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+    .quiz-content,
+    .certifications-section,
+    .question-item {
+        animation: none;
+        opacity: 1;
+    }
+    
+    .quiz-content:hover,
+    .certifications-section:hover,
+    .question-item:hover,
+    .view-details-btn:hover {
+        transform: none;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .course-header {
+        padding: 3rem 0 2rem;
+    }
+    
+    .certification-tabs {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+    
+    .certification-tabs div {
+        text-align: center;
+    }
+    
+    .certifications-table {
+        display: block;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
+
+@media (max-width: 576px) {
+    .quiz-content,
+    .certifications-section {
+        padding: 1.5rem;
+        border-radius: var(--border-radius-md);
+    }
+    
+    .question-item {
+        padding: 1.25rem;
+    }
+    
+    .view-details-btn {
+        width: 100%;
+    }
+}
+</style>
+
+<div class="quiz-container">
+    <!-- Course Header -->
+    <div class="course-header text-center">
+        <div class="container">
+            <h1 class="course-title">Quiz for {{ course.title }}</h1>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Quiz Questions Section -->
+        <div class="quiz-content">
+            <h2 class="section-title">Basic Level Questions</h2>
+            <ul class="questions-list">
+                {% for assignment in assignments %}
+                <li class="question-item">
+                    <p class="question-text">{{ assignment.title }}</p>
+                    <a href="{% url 'assignments:assignment_details' assignment.id %}" class="view-details-btn">
+                        View Details
+                    </a>
+                </li>
+                {% empty %}
+                <li class="question-item">
+                    <p class="question-text">No questions available yet.</p>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

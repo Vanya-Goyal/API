@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI & Machine Learning Course | Knowlify</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='CSS/AIML.css') }}">
+</head>
+<body>
+
+    {% extends "base.html" %}
+    {% block content %}
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>AI & Machine Learning</h1>
+            <p>Master AI, Deep Learning & ML with Real-World Projects</p>
+            <ul class="course-details">
+                <li>📅 Duration: 6 Months</li>
+                <li>⭐ Beginner to Advanced</li>
+                <li>🏆 Certificate of Completion</li>
+            </ul>
+            <a href="#pricing" class="enroll-btn">Enroll Now</a>
+        </div>
+        <div class="hero-image">
+            <img src="../static/images/AIMLC.jpeg" alt="AI & Machine Learning">
+        </div>
+    </section>
+
+    <!-- About the Course -->
+    <section class="about-course">
+        <h2>About This Course</h2>
+        <p>Learn Python, Data Science, Machine Learning, Deep Learning, and AI fundamentals with hands-on projects. Ideal for aspiring AI engineers and data scientists.</p>
+        <ul>
+            <li>✅ Hands-on AI & ML projects</li>
+            <li>✅ Learn from industry experts</li>
+            <li>✅ Gain practical experience with real datasets</li>
+        </ul>
+    </section>
+
+    <!-- Course Curriculum -->
+    <section class="curriculum">
+        <h2>Course Curriculum</h2>
+        <div class="modules">
+            <div class="module">
+                <h3>Module 1: Python for AI & ML</h3>
+                <p>Learn Python, NumPy, Pandas, and Data Visualization.</p>
+            </div>
+            <div class="module">
+                <h3>Module 2: Machine Learning</h3>
+                <p>Understand Supervised & Unsupervised Learning, Regression, and Classification.</p>
+            </div>
+            <div class="module">
+                <h3>Module 3: Deep Learning</h3>
+                <p>Master Neural Networks, CNNs, and NLP with TensorFlow & PyTorch.</p>
+            </div>
+            <div class="module">
+                <h3>Module 4: AI Applications</h3>
+                <p>Work on AI-driven applications like Chatbots, Image Recognition, and more.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructor Section -->
+    <section class="instructor">
+        <h2>Meet Your Instructor</h2>
+        <div class="instructor-card">
+            <img src="../static/images/aimlsir.webp" alt="Instructor">
+            <h3>Jane Smith</h3>
+            <p>AI & ML Specialist | 10+ Years of Experience</p>
+            <p>Worked with Google AI, Tesla, and top research labs. Passionate about AI innovation and education.</p>
+        </div>
+    </section>
+
+    <!-- Student Testimonials -->
+    <section class="testimonials">
+        <h2>What Our Students Say</h2>
+        <div class="testimonial">
+            <p>“This course gave me a solid understanding of AI & ML and helped me land an AI engineering job!”</p>
+            <h4>⭐ ⭐ ⭐ ⭐ ⭐ - Michael R.</h4>
+        </div>
+        <div class="testimonial">
+            <p>“Incredible hands-on projects and well-structured modules. Highly recommended!”</p>
+            <h4>⭐ ⭐ ⭐ ⭐ ⭐ - Lisa K.</h4>
+        </div>
+    </section>
+
+    <!-- What’s Included -->
+    <section class="whats-included">
+        <h2>What's Included</h2>
+        <ul>
+            <li>🎥 100+ HD Video Lessons</li>
+            <li>🏆 Certificate of Completion</li>
+            <li>🔥 Live Q&A Sessions</li>
+            <li>✅ Hands-on AI & ML Projects</li>
+            <li>💡 Career Guidance</li>
+        </ul>
+    </section>
+
+    <!-- Pricing Plans -->
+    <section class="pricing" id="pricing">
+        <h2>Choose Your Plan</h2>
+        <div class="price-card">
+            <h3>Standard</h3>
+            <p>🎥 Self-Paced Learning</p>
+            <p>✅ Lifetime Access</p>
+            <p>💰 <strong>$59.99</strong></p>
+            <form method="POST" action="{{ url_for('add_to_cart') }}">
+                <input type="hidden" name="course_id" value="aiml101">
+                <input type="hidden" name="course_name" value="AI & Machine Learning Mastery">
+                <input type="hidden" name="price" value="5999">
+                <a href="{{ url_for('add_to_cart') }}"><button type="submit" class="add-to-cart-btn">Add to Cart</button></a>
+            </form>
+        </div>
+        <div class="price-card">
+            <h3>Premium</h3>
+            <p>👨‍🏫 1-on-1 Mentorship</p>
+            <p>💡 Job Assistance</p>
+            <p>💰 <strong>$109.99</strong></p>
+            <button>Buy Now</button>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq">
+        <h2>Frequently Asked Questions</h2>
+        <div class="faq-item">
+            <h3>Do I need prior AI experience?</h3>
+            <p>No, this course is designed for beginners.</p>
+        </div>
+        <div class="faq-item">
+            <h3>How long do I have access to the course?</h3>
+            <p>You get lifetime access!</p>
+        </div>
+    </section>
+
+    {% endblock %}
+
+</body>
+</html>

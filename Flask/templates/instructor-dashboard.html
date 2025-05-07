@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container mt-5">
+  <h2 class="fw-bold text-primary mb-4 text-center">🎓 Instructor Dashboard</h2>
+
+  <div class="row">
+    {% for course in courses %}
+    <div class="col-md-6 col-lg-4 mb-4">
+      <div class="card h-100 shadow border-0 rounded-4 overflow-hidden course-card">
+        {% if course.image %}
+        <img src="{{course.image}}" class="card-img-top rounded-top-4" style="height: 200px; object-fit: cover;">
+        {% else %}
+        <div class="course-image-placeholder bg-gradient-{{ loop.index }}" style="height: 200px;" 
+             class="d-flex align-items-center justify-content-center">
+          <span class="text-white fs-1">{{ course.title[:1] }}</span>
+        </div>
+        {% endif %}
+
+        <div class="card-body">
+          <h5 class="card-title fw-semibold text-truncate">{{ course.title }}</h5>
+          <div class="course-description" style="height: 60px; overflow: hidden;">
+            <p class="card-text">{{ course.description[:25] }}...</p>
+          </div>
+          <div class="d-flex justify-content-between align-items-center mt-3">
+            <span class="badge bg-success rounded-pill">₹{{ course.price }}</span>
+            <span class="badge bg-{{ course.difficulty|lower }} rounded-pill text-capitalize">
+              {{ course.difficulty or "All Levels" }}
+            </span>
+          </div>
+        </div>
+
+        <div class="card-footer bg-light border-top d-flex flex-wrap justify-content-between gap-2">
+          <a href="{{ url_for('edit_course', course_id=course.id) }}" class="btn btn-sm btn-outline-warning flex-grow-1">
+            ✏️ Edit
+          </a>
+          <a href="{{ url_for('delete_course', course_id=course.id) }}" class="btn btn-sm btn-outline-danger flex-grow-1">
+            🗑️ Delete
+          </a>
+          <a href="{{ url_for('add_assignment', course_id=course.id) }}" class="btn btn-sm btn-outline-primary flex-grow-1">
+            ➕ Assignment
+          </a>
+          <a href="{{ url_for('assignment_list', course_id=course.id) }}" class="btn btn-sm btn-outline-success flex-grow-1">
+            📋 View
+          </a>
+        </div>
+      </div>
+    </div>
+    {% else %}
+    <div class="col-12">
+      <div class="alert alert-info text-center">No courses found. Start by adding a new one!</div>
+    </div>
+    {% endfor %}
+  </div>
+</div>
+
+<!-- Styles remain unchanged (same as in your question) -->
+
+{% endblock %}

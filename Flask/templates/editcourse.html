@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container my-5">
+    <h2>Edit Course</h2>
+
+    {% if current_user.role == "admin" %}
+
+
+
+    <form action="{{ url_for('edit_course', course_id=course.id) }}" method="POST" enctype="multipart/form-data">
+
+        <div class="mb-3">
+            <label for="title" class="form-label">Course Title</label>
+            <input type="text" class="form-control" id="title" name="title"value="{{ course.title }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="description" class="form-label">Course Description</label>
+            <textarea class="form-control" id="description" name="description" required></textarea>
+        </div>
+
+        <div class="mb-3">
+            <label for="price" class="form-label">Price ($)</label>
+            <input type="number" class="form-control" id="price" name="price" step="0.01"value="{{ course.price }}" required>
+        </div>
+
+        <div class="mb-3">
+            <label for="category" class="form-label">Category</label>
+            <input type="text" class="form-control" id="category" name="category"value="{{ course.category }}">
+        </div>
+
+        <div class="mb-3">
+            <label for="image" class="form-label">Course Image URL</label>
+            <input type="text" class="form-control" id="image" name="image"value="{{ course.image }}">
+        </div>
+
+        <button type="submit" class="btn btn-dark">Update Course</button>
+    </form>
+    {% else %}
+    <div class="alert alert-danger mt-3">Access Denied! Only Admins can access this page.</div>
+    {% endif %}
+
+    <a href="{{ url_for('courses') }}" class="btn btn-secondary mt-4">View All Courses</a>
+</div>
+{% endblock %}
