@@ -32,8 +32,13 @@ Flask Microservices: For specialized services (e.g., quiz engine).
 
 🛠️ Tech Stack
 Category	Technologies
+
 Backend	Django (Python), Django REST Framework
+
 API Consumer	Flask (for microservices)
+
 Database	SQLAlchemy
+
 Frontend	HTML, CSS, JavaScript
+
 Deployment	Python Anywhere
