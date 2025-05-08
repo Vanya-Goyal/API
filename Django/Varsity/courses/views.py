@@ -13,7 +13,7 @@ from django.core.files.storage import FileSystemStorage
 from django.http import Http404
 
 def course_list(request):
-    # Fetch courses from Flask API only
+    
     FLASK_API_URL = "http://127.0.0.1:5001/api/courses"
     try:
         response = requests.get(FLASK_API_URL)
@@ -23,29 +23,29 @@ def course_list(request):
         flask_courses = []
         messages.error(request, f"Could not fetch courses from Flask API: {e}")
 
-    # Filtering, sorting, and pagination (basic, since data is now a list)
+    
     query = request.GET.get('q', '').lower() if request.GET.get('q') else ''
     sort_by = request.GET.get('sort')
     category = request.GET.get('category', '').lower() if request.GET.get('category') else ''
 
-    # Filter by query and category
+    
     if query:
         flask_courses = [c for c in flask_courses if query in c.get('title', '').lower()]
     if category:
         flask_courses = [c for c in flask_courses if category == c.get('category', '').lower()]
 
-    # Sort
+    
     if sort_by == 'price_asc':
         flask_courses = sorted(flask_courses, key=lambda x: x.get('price', 0))
     elif sort_by == 'price_desc':
         flask_courses = sorted(flask_courses, key=lambda x: x.get('price', 0), reverse=True)
 
-    # Pagination
+    
     paginator = Paginator(flask_courses, 6)
     page = request.GET.get('page')
     courses = paginator.get_page(page)
 
-    # Get unique categories from Flask data
+    
     categories = list(set(c.get('category', '') for c in flask_courses))
 
     return render(request, 'courses/course_list.html', {
@@ -65,7 +65,7 @@ def buy_course(request, course_id):
         course.students.add(request.user)
     return render(request, 'courses/payment_success.html', {'course': course})
 
-# Check if user is instructor (customize based on your User model)
+
 def is_instructor(user):
     return user.is_authenticated or user.role == 'instructor'
 
@@ -73,7 +73,7 @@ def is_instructor(user):
 @login_required
 @user_passes_test(is_instructor)
 def instructor_dashboard(request):
-    # Fetch courses from Flask API only
+    
     FLASK_API_URL = "http://127.0.0.1:5001/api/courses"
     try:
         response = requests.get(FLASK_API_URL)
@@ -97,14 +97,14 @@ FLASK_API_URL = "http://127.0.0.1:5001/api/courses"
 
 @login_required
 def add_course(request):
-    # Permission check
+    
     if request.user.role != 'instructor' and not request.user.is_superuser:
         return redirect('courses:course_list')
 
     if request.method == 'POST':
         form = CourseForm(request.POST, request.FILES)
         if form.is_valid():
-            # Prepare data for Flask API
+            
             course_data = {
                 'title': form.cleaned_data['title'],
                 'description': form.cleaned_data['description'],
@@ -113,7 +113,7 @@ def add_course(request):
                 'instructor_id': request.user.id,
             }
 
-            # Handle file upload (if any)
+            
             if 'image' in request.FILES:
                 fs = FileSystemStorage()
                 image = request.FILES['image']
@@ -121,15 +121,15 @@ def add_course(request):
                 course_data['image_url'] = request.build_absolute_uri(fs.url(filename))
 
             try:
-                # Send course data to Flask API
+                
                 response = requests.post(
                     FLASK_API_URL,
                     json=course_data,
                     headers={'Content-Type': 'application/json'}
                 )
-                response.raise_for_status()  # Check if the request was successful
+                response.raise_for_status()  
 
-                # Save the course data in Django as well
+                
                 course = Course(
                     title=form.cleaned_data['title'],
                     description=form.cleaned_data['description'],
@@ -138,17 +138,17 @@ def add_course(request):
                     instructor=request.user,
                 )
 
-                # Save image if it was uploaded
+               
                 if 'image' in request.FILES:
                     course.image_url = request.build_absolute_uri(fs.url(filename))
 
-                course.save()  # Save course to Django database
+                course.save() 
 
                 messages.success(request, "Course created successfully in both Flask and Django!")
                 return redirect('courses:instructor_dashboard')
 
             except requests.exceptions.RequestException as e:
-                # Cleanup the uploaded image if there's an error
+               
                 if 'image_url' in course_data:
                     fs.delete(filename)
                 error_msg = str(e)
@@ -165,7 +165,7 @@ def add_course(request):
 @user_passes_test(is_instructor)
 def edit_course(request, course_id):
     flask_api_url = f"http://127.0.0.1:5001/api/course/{course_id}"
-    # Fetch course data from Flask API for GET (form display)
+   
     if request.method == 'GET':
         try:
             response = requests.get(flask_api_url)
@@ -175,7 +175,7 @@ def edit_course(request, course_id):
             messages.error(request, f"Could not fetch course from Flask API: {e}")
             return redirect('courses:instructor_dashboard')
         return render(request, 'courses/edit_course.html', {'course': course_data})
-    # Handle POST (form submission)
+    
     if request.method == 'POST':
         data = {
             'title': request.POST.get('title'),
@@ -186,7 +186,7 @@ def edit_course(request, course_id):
         try:
             put_response = requests.put(flask_api_url, json=data)
             put_response.raise_for_status()
-            # Update Django DB if course exists
+           
             from .models import Course
             try:
                 course = Course.objects.get(pk=course_id)
@@ -196,7 +196,7 @@ def edit_course(request, course_id):
                 course.category = data['category']
                 course.save()
             except Course.DoesNotExist:
-                pass  # It's ok if not found in Django
+                pass 
             messages.success(request, "Course updated successfully in Flask! (Django updated if present)")
             return redirect('courses:instructor_dashboard')
         except requests.exceptions.RequestException as e:
@@ -208,7 +208,7 @@ def edit_course(request, course_id):
 @user_passes_test(is_instructor)
 def delete_course(request, course_id):
     flask_api_url = f"http://127.0.0.1:5001/api/course/{course_id}"
-    # Show confirmation page on GET
+    
     if request.method == 'GET':
         try:
             response = requests.get(flask_api_url)
@@ -218,7 +218,7 @@ def delete_course(request, course_id):
             messages.error(request, f"Could not fetch course from Flask API: {e}")
             return redirect('courses:instructor_dashboard')
         return render(request, 'courses/confirm_delete.html', {'course': course_data})
-    # Handle POST (delete)
+    
     if request.method == 'POST':
         flask_deleted = False
         django_deleted = False
@@ -228,14 +228,14 @@ def delete_course(request, course_id):
             flask_deleted = True
         except requests.exceptions.RequestException as e:
             messages.error(request, f"Failed to delete course from Flask: {e}")
-        # Try to delete from Django as well
+        
         from .models import Course
         try:
             course = Course.objects.get(pk=course_id)
             course.delete()
             django_deleted = True
         except Course.DoesNotExist:
-            pass  # It's ok if not found in Django
+            pass  
         if flask_deleted:
             messages.success(request, "Course deleted successfully from Flask." + (" Also deleted from Django." if django_deleted else ""))
         return redirect('courses:instructor_dashboard')
